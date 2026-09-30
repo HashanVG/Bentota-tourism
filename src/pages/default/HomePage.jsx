@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import {
   ArrowDown,
   ArrowRight,
-  ArrowUpRight,
   Clock,
   ChevronLeft,
   ChevronRight,
@@ -103,27 +102,31 @@ export default function HomePage() {
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section className="relative h-screen min-h-150 w-full overflow-hidden bg-forest-dark">
         {/* Replace with your own background image */}
-        <img src={hero} alt="hero" className="absolute inset-0 w-full h-full object-cover" />
+        <img
+          src={hero}
+          alt="hero"
+          className="absolute -top-72 sm:-top-80 md:top-0 inset-x-0 w-full h-[calc(100%+18rem)] sm:h-[calc(100%+20rem)] md:h-full object-cover object-center"
+        />
         <div className="absolute inset-0 bg-linear-to-b from-forest-dark/70 via-forest-dark/50 to-forest-dark" />
         <TopoLines />
 
-        <div className="relative h-full flex flex-col items-center justify-center text-center px-6">
+        <div className="relative h-full flex flex-col items-center justify-center text-center px-6 -translate-y-8 sm:-translate-y-10 md:translate-y-0">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-display text-5xl md:text-6xl lg:text-7xl  text-white leading-[1.05] max-w-4xl"
+            className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white leading-[1] md:leading-[1.02] tracking-tight max-w-5xl"
           >
-            <span className="font-extrabold ">Ayubowan</span>
+            <span className="font-extrabold">Ayubowan</span>
             <br />
-            <span className="text-forest-accent-light font-extrabold">Sri Lanka</span>
+            <span className="text-forest-accent-light font-extrabold inline-block mt-0.5 sm:mt-1">Sri Lanka</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-gray-300 font-display font-bold mt-6 max-w-lg text-base lg:text-lg text-md"
+            className="text-gray-200 font-display font-semibold mt-3 sm:mt-4 md:mt-5 max-w-2xl text-base sm:text-lg md:text-xl lg:text-2xl tracking-wide"
           >
             Bentota Samantha Tours & Travels
           </motion.p>
@@ -132,7 +135,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 mt-10"
+            className="flex flex-col sm:flex-row gap-4 mt-8 md:mt-10"
           >
             <Link
               to="/excursions"
@@ -224,61 +227,67 @@ export default function HomePage() {
       </section>
 
       {/* ── Excursions ────────────────────────────────────────────────── */}
-      <section id="excursions" className="bg-gray-50 py-24 px-6">
+      <section id="excursions" className="bg-gray-50 py-16 sm:py-24 px-3 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-14">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-14 px-1 sm:px-0">
             <div>
               <span className="text-xs uppercase tracking-[0.25em] text-forest-primary font-semibold">
                 Excursions
               </span>
-              <h2 className="font-display text-4xl sm:text-5xl text-forest-dark mt-3">
+              <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-forest-dark mt-2 sm:mt-3">
                 Pick your tour.
               </h2>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
             {excursions.map((trip, i) => (
-              <motion.a
-                key={trip.title}
+              <motion.div
+                key={trip.title + i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.5, delay: i * 0.05 }}
-                className="group relative rounded-2xl overflow-hidden bg-white shadow-sm hover:shadow-xl transition-shadow duration-300"
+                className="group relative rounded-xl sm:rounded-2xl overflow-hidden bg-white shadow-xs hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between"
               >
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={trip.image}
-                    alt={trip.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <span className="absolute top-4 left-4 bg-white/90 text-forest-primary text-xs font-semibold px-3 py-1 rounded-full">
-                    {trip.tag}
-                  </span>
-                </div>
+                <div>
+                  <div className="relative h-28 sm:h-44 md:h-52 lg:h-56 overflow-hidden bg-slate-100">
+                    <img
+                      src={trip.image}
+                      alt={trip.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    {trip.tag && (
+                      <span className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-white/90 text-forest-primary text-[10px] sm:text-xs font-semibold px-2 py-0.5 sm:px-3 sm:py-1 rounded-full">
+                        {trip.tag}
+                      </span>
+                    )}
+                  </div>
 
-                <div className="p-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-display text-lg text-forest-dark leading-snug pr-4">
+                  <div className="p-3 sm:p-5 md:p-6">
+                    <h3 className="font-display text-xs sm:text-base md:text-lg text-forest-dark leading-snug line-clamp-2">
                       {trip.title}
                     </h3>
-                  </div>
-                  <div className="flex items-center justify-between mt-4 text-sm text-gray-500">
-                    <span className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5" /> {trip.duration}
-                    </span>
-                    <span className="font-semibold text-forest-secondary">{trip.price}</span>
+                    <div className="flex items-center justify-between mt-2 sm:mt-4 text-[11px] sm:text-sm text-gray-500">
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> {trip.duration || '2-3 hrs'}
+                      </span>
+                      {trip.price && (
+                        <span className="font-semibold text-forest-secondary">{trip.price}</span>
+                      )}
+                    </div>
                   </div>
                 </div>
-                <div className="pt-3 pb-6 px-8">
-                  <button onClick={() => navigate(`/excursions/${trip.title.toLowerCase().replace(/\s+/g, '-')}`)}
-                    className="text-white bg-forest-primary font-semibold hover:bg-forest-primary-light w-full text-center border  rounded-lg py-1.5">
+
+                <div className="pt-1 pb-3 px-2.5 sm:pt-3 sm:pb-6 sm:px-6">
+                  <button
+                    onClick={() => navigate(`/excursions/${trip.title.toLowerCase().replace(/\s+/g, '-')}`)}
+                    className="text-white bg-forest-primary font-semibold hover:bg-forest-primary-light w-full text-center border rounded-lg py-1.5 sm:py-2 text-[11px] sm:text-sm transition-colors cursor-pointer"
+                  >
                     Read More
                   </button>
                 </div>
-
-              </motion.a>
+              </motion.div>
             ))}
           </div>
         </div>

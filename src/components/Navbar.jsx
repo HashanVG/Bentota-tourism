@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
-import { NavLink, useLocation } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
-import logo from '../assets/logo/bstt logo.png'
+import { NavLink } from 'react-router-dom'
+import logo from '../assets/logo/ChatGPT Image Sep 30, 2026, 10_37_52 PM.png'
 
 const links = [
   { to: '/', label: 'Home' },
@@ -14,41 +13,48 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const location = useLocation()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40)
+    const onScroll = () => setScrolled(window.scrollY > 10)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  useEffect(() => setMenuOpen(false), [location])
+  const handleLogoClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+    const mainEl = document.querySelector('main')
+    if (mainEl) {
+      mainEl.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+    setMenuOpen(false)
+  }
 
   return (
-    <motion.nav
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 h-[90px] bg-white/95 backdrop-blur-md border-b transition-colors duration-200 ${
         scrolled
-          ? 'bg-white/90 backdrop-blur-xl border-b border-forest-primary/10 py-3 shadow-sm shadow-forest-primary/5'
-          : 'py-6'
+          ? 'border-gray-200/80 shadow-xs'
+          : 'border-transparent'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        <NavLink to="/" className="flex items-center gap-3 group">
-          <img src={logo} alt="Logo" className="w-96  object-contain" />
+      <div className="max-w-screen-2xl mx-auto h-full px-6 sm:px-10 md:px-14 lg:px-20 flex items-center justify-between">
+        <NavLink to="/" onClick={handleLogoClick} className="flex items-center">
+          <img
+            src={logo}
+            alt="Bentota Samantha Tours & Travels"
+            className="h-12 sm:h-14 md:h-16 lg:h-[70px] w-auto object-contain"
+          />
         </NavLink>
 
         {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden md:flex items-center gap-8 font-nav">
           {links.map(({ to, label }) => (
             <li key={to}>
               <NavLink
                 to={to}
                 className={({ isActive }) =>
-                  `relative text-sm font-medium tracking-widest uppercase transition-colors duration-300 ${
-                    isActive ? 'nav-link--active' : 'text-slate-500 hover:text-slate-900'
+                  `relative py-1 text-sm font-bold tracking-wider uppercase transition-colors duration-200 ${
+                    isActive ? 'text-forest-primary' : 'text-slate-700 hover:text-forest-primary'
                   }`
                 }
               >
@@ -56,11 +62,7 @@ export default function Navbar() {
                   <>
                     {label}
                     {isActive && (
-                      <motion.span
-                        layoutId="nav-underline"
-                        className="absolute -bottom-1 left-0 right-0 h-px nav-underline"
-                        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                      />
+                      <span className="absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-forest-primary rounded-full" />
                     )}
                   </>
                 )}
@@ -71,54 +73,50 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-2"
+          className="md:hidden flex flex-col justify-center items-center gap-1.5 p-2 text-slate-800"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
-          <motion.span
-            animate={menuOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
-            className="block w-6 h-0.5 bg-slate-800 origin-center"
+          <span
+            className={`block w-6 h-0.5 bg-slate-800 transition-transform duration-200 ${
+              menuOpen ? 'rotate-45 translate-y-2' : ''
+            }`}
           />
-          <motion.span
-            animate={menuOpen ? { opacity: 0 } : { opacity: 1 }}
-            className="block w-6 h-0.5 bg-slate-800"
+          <span
+            className={`block w-6 h-0.5 bg-slate-800 transition-opacity duration-200 ${
+              menuOpen ? 'opacity-0' : ''
+            }`}
           />
-          <motion.span
-            animate={menuOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
-            className="block w-6 h-0.5 bg-slate-800 origin-center"
+          <span
+            className={`block w-6 h-0.5 bg-slate-800 transition-transform duration-200 ${
+              menuOpen ? '-rotate-45 -translate-y-2' : ''
+            }`}
           />
         </button>
       </div>
 
-      {/* Mobile menu */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden bg-white/95 backdrop-blur-xl border-t border-forest-primary/10"
-          >
-            <ul className="flex flex-col px-6 py-4 gap-4">
-              {links.map(({ to, label }) => (
-                <li key={to}>
-                  <NavLink
-                    to={to}
-                    className={({ isActive }) =>
-                      `block text-sm font-medium tracking-widest uppercase py-2 transition-colors ${
-                        isActive ? 'nav-link--active' : 'text-slate-500'
-                      }`
-                    }
-                  >
-                    {label}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.nav>
+      {/* Mobile dropdown menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-lg font-nav">
+          <ul className="flex flex-col px-6 py-4 gap-3">
+            {links.map(({ to, label }) => (
+              <li key={to}>
+                <NavLink
+                  to={to}
+                  onClick={() => setMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `block text-sm font-bold tracking-wider uppercase py-2 transition-colors duration-200 ${
+                      isActive ? 'text-forest-primary' : 'text-slate-700 hover:text-forest-primary'
+                    }`
+                  }
+                >
+                  {label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </nav>
   )
 }

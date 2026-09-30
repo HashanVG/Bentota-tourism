@@ -15,7 +15,7 @@ export default function GuestLayout() {
             <div className="flex min-h-screen flex-col">
                 <Navbar />
                 <main className="flex-1 overflow-auto flex flex-col">
-                    <div className="flex-1 pt-24">
+                    <div className="flex-1 pt-[90px]">
                         <Outlet />
                     </div>
                     <Footer />

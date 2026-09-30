@@ -34,20 +34,23 @@ export default function AboutPage() {
     return (
         <div>
             {/* ── Hero ──────────────────────────────────────────────────────── */}
-            <section className="relative h-screen min-h-150 w-full overflow-hidden bg-forest-dark">
-                {/* Replace with your own background image */}
-                <img src={about} alt="about" className="absolute inset-0 w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-linear-to-b from-forest-dark/70 via-forest-dark/50 to-forest-dark" />
+            <section className="relative w-full aspect-[4/3] md:aspect-auto md:h-screen md:min-h-150 overflow-hidden bg-forest-dark">
+                {/* Full photo matches 4:3 ratio with zero cropping or letterboxing */}
+                <img
+                    src={about}
+                    alt="About Us"
+                    className="absolute inset-0 w-full h-full object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-forest-dark/95 via-forest-dark/40 to-transparent md:bg-linear-to-b md:from-forest-dark/70 md:via-forest-dark/50 md:to-forest-dark" />
                 <TopoLines />
 
-                <div className="relative h-full flex flex-col items-center justify-end text-center px-6 pb-28">
+                <div className="relative h-full flex flex-col items-center justify-end text-center px-4 md:px-6 pb-4 sm:pb-6 md:pb-28">
                     <motion.h1
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7, delay: 0.1 }}
-                        className="font-display text-5xl md:text-6xl lg:text-7xl  text-white leading-[1.05] max-w-4xl"
+                        className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-7xl text-white leading-[1.05] max-w-4xl"
                     >
-                        <br />
                         <span className="text-white font-extrabold">About <span className='text-forest-primary-light'>Us</span></span>
                     </motion.h1>
 
@@ -55,7 +58,7 @@ export default function AboutPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7, delay: 0.2 }}
-                        className="text-gray-300 font-display font-bold mt-6 max-w-lg text-base lg:text-lg text-md"
+                        className="text-gray-200 font-display font-semibold mt-1.5 sm:mt-2 md:mt-6 max-w-lg text-xs sm:text-sm md:text-lg tracking-wide"
                     >
                         Bentota Samantha Tours & Travels
                     </motion.p>

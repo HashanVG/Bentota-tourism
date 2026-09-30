@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest-primary: #166534;
+  --color-forest-primary-light: #22C55E;
+  --color-forest-secondary: #CA8A04;
+  --color-forest-accent: #84CC16;
+  --color-forest-accent-light: #A3E635;
+  --color-forest-gold: #EAB308;
+  --color-forest-dark: #1C1917;
+  --color-forest-text: #44403C;
+  --font-display: 'Fraunces', serif;
+}
+
+.nav-link--active {
+  color: var(--color-forest-primary);
+}
+
+.nav-underline {
+  background-color: var(--color-forest-primary);
+}

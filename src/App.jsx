@@ -5,6 +5,7 @@ import GuestLayout from './layouts/GuestUserLayout.jsx';
 import HomePage from './pages/default/HomePage.jsx';
 import AboutPage from './pages/default/AboutPage.jsx';
 import ContactPage from './pages/default/ContactPage.jsx';
+import RoundTourPage from './pages/default/RoundTourPage.jsx';
 
 function App() {
   return (
@@ -16,7 +17,10 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/excursions" element={<div>ExcursionPage</div>}/>
-        <Route path="/voiceover" element={<div>Activities Page</div>} />
+        <Route path="/round-tour" element={<RoundTourPage />} />
+        <Route path="/round-tours" element={<RoundTourPage />} />
+        <Route path="/activities" element={<RoundTourPage />} />
+        <Route path="/voiceover" element={<RoundTourPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Route>
 

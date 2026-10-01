@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { FaFacebookF, FaTripadvisor, FaWhatsapp } from 'react-icons/fa'
+import { FaFacebookF, FaTripadvisor, FaWhatsapp, FaInstagram } from 'react-icons/fa'
 import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react'
 import logo from '../assets/logo/bstt logo footer.png'
 
@@ -12,11 +13,17 @@ export default function Footer() {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Excursions', href: '/excursions' },
-    { name: 'Activities', href: '/activities' },
+    { name: 'Round Tour', href: '/round-tour' },
     { name: 'Contact Us', href: '/contact' }
   ]
 
-  const trailLinks = ['Ella Private Day Trip', 'Sinharaja Rainforest Trekking Private Day Trip', 'Galle & Benthota Full Day Tour From Colombo', 'Kandy Full Day Tour Private All Inclusive']
+  const popularTrips = [
+    { name: 'Yala National Park Safari', href: '/excursions' },
+    { name: 'Sinharaja Rainforest Trek', href: '/excursions' },
+    { name: 'Historic Galle Fort', href: '/excursions' },
+    { name: 'Sacred City of Kandy', href: '/excursions' },
+    { name: 'Scenic Ella Day Adventure', href: '/excursions' },
+  ]
 
   return (
     <footer className="relative bg-forest-dark text-gray-300 overflow-hidden">
@@ -70,14 +77,28 @@ export default function Footer() {
               <a
                 href='https://web.facebook.com/bentotasamantha'
                 target='_blank'
+                rel='noopener noreferrer'
+                aria-label='Facebook'
                 className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-gray-400 hover:text-forest-dark hover:bg-forest-primary-light hover:border-forest-primary-light transition-colors duration-300"
               >
                 <FaFacebookF className="w-4 h-4" strokeWidth={1.5} />
               </a>
 
               <a
+                href='https://www.instagram.com/samantha_pushpalal?stkn=NmpuM3pvajBya3Zn'
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='Instagram'
+                className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-gray-400 hover:text-forest-dark hover:bg-forest-primary-light hover:border-forest-primary-light transition-colors duration-300"
+              >
+                <FaInstagram className="w-4 h-4" strokeWidth={1.5} />
+              </a>
+
+              <a
                 href='https://wa.me/94772408371'
                 target='_blank'
+                rel='noopener noreferrer'
+                aria-label='WhatsApp'
                 className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-gray-400 hover:text-forest-dark hover:bg-forest-primary-light hover:border-forest-primary-light transition-colors duration-300"
               >
                 <FaWhatsapp className="w-4 h-4" strokeWidth={1.5} />
@@ -93,9 +114,12 @@ export default function Footer() {
             <ul className="space-y-3">
               {exploreLinks.map((item) => (
                 <li key={item.name}>
-                  <a href={item.href} className="text-sm text-gray-400 hover:text-forest-primary-light transition-colors">
+                  <Link
+                    to={item.href}
+                    className="text-sm text-gray-400 hover:text-forest-primary-light transition-colors"
+                  >
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -104,11 +128,14 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-5">Popular Trips</h4>
             <ul className="space-y-3">
-              {trailLinks.map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-sm text-gray-400 hover:text-forest-primary-light transition-colors">
-                    {item}
-                  </a>
+              {popularTrips.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.href}
+                    className="text-sm text-gray-400 hover:text-forest-primary-light transition-colors"
+                  >
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -119,7 +146,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-gray-400">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 mt-0.5 text-forest-primary shrink-0" strokeWidth={1.5} />
-                <span>Galle Road, Bentota,<br />Sri Lanka, 80500</span>
+                <span>Galle Road, Bentota,<br />Sri Lanka.</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-forest-primary shrink-0" strokeWidth={1.5} />

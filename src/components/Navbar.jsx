@@ -6,7 +6,7 @@ const links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/excursions', label: 'Excursions' },
-  { to: '/activities', label: 'Activities' },
+  { to: '/round-tour', label: 'Round Tour' },
   { to: '/contact', label: 'Contact' },
 ]
 

@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 import { MapPin, Phone, Mail, Clock, ArrowRight, Send } from 'lucide-react'
-import { FaWhatsapp, FaFacebookF, FaTripadvisor } from 'react-icons/fa'
+import { FaWhatsapp, FaFacebookF, FaTripadvisor, FaInstagram } from 'react-icons/fa'
 import contactBg from '../../assets/contact/contact.jpg'
 import { href } from 'react-router-dom'
 
@@ -40,7 +40,7 @@ const infoCards = [
   {
     Icon: MapPin,
     label: 'Location',
-    value: 'Galle Road, Bentota, Sri Lanka, 80500',
+    value: 'Galle Road, Bentota, Sri Lanka.',
     href: 'https://www.google.com/maps/search/?api=1&query=Galle+Road+Bentota+Sri+Lanka',
   },
   {
@@ -301,13 +301,26 @@ export default function ContactPage() {
                   <a
                     href='https://web.facebook.com/bentotasamantha'
                     target='_blank'
+                    rel="noopener noreferrer"
+                    aria-label="Facebook"
                     className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-forest-dark hover:bg-forest-primary hover:text-white hover:border-forest-primary transition-colors duration-300"
                   >
                     <FaFacebookF className="w-4 h-4" />
                   </a>
                   <a
+                    href='https://www.instagram.com/samantha_pushpalal?stkn=NmpuM3pvajBya3Zn'
+                    target='_blank'
+                    rel="noopener noreferrer"
+                    aria-label="Instagram"
+                    className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-forest-dark hover:bg-forest-primary hover:text-white hover:border-forest-primary transition-colors duration-300"
+                  >
+                    <FaInstagram className="w-4 h-4" />
+                  </a>
+                  <a
                     href='https://wa.me/94772408371'
                     target='_blank'
+                    rel="noopener noreferrer"
+                    aria-label="WhatsApp"
                     className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-forest-dark hover:bg-forest-primary hover:text-white hover:border-forest-primary transition-colors duration-300"
                   >
                     <FaWhatsapp className="w-4 h-4" />

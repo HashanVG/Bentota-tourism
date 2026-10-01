@@ -74,8 +74,8 @@ export default function AboutPage() {
                     transition={{ duration: 0.6 }}
                     className="mx-auto max-w-3xl  bg-white/70 p-8 backdrop-blur-sm sm:p-12"
                 >
-                    <p className="text-md lg:text-lg leading-relaxed text-forest-text/90">
-                        Samantha tours & travels is a joint venture with thoroughly Srilankan roots.Samantha tours & travels main ambition is to be a brand leader in tourist and leisure industry. We have long association with European tour operators and our clientele base is essentially Europeans. Our clientele base is thoroughly heterogeneous and we cater to the different taste of our clients to their maximum satisfaction. Our motto is safety and satisfaction of our clients. Our wealth is goodwill of our clients. We highly regard privacy of our clients.
+                    <p className="text-md lg:text-lg leading-relaxed text-forest-text/90 text-justify">
+                        Samantha Tours & Travels is a joint venture with thoroughly Sri Lankan roots. Samantha Tours & Travels’ main ambition is to be a brand leader in the tourist and leisure industry. We have long associations with leading international tour operators, and our clientele base spans travelers from across the globe. Our clientele base is thoroughly diverse, and we cater to the distinct tastes of our clients to their maximum satisfaction. Our motto is the safety and satisfaction of our clients. Our wealth is the goodwill of our clients. We highly regard the privacy of our clients.
                     </p>
                 </motion.div>
             </section>

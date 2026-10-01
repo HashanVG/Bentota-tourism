@@ -7,6 +7,8 @@ import {
   Clock,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
+  ChevronUp,
   Star,
   Quote,
   Phone,
@@ -24,8 +26,8 @@ import heroMobile from '../../assets/fba82c73204c5d020e8ce08eaa4a9cb0.jpg'
 import about1 from '../../assets/about/about5.jpg'
 import about2 from '../../assets/about/about4.webp'
 import cta from '../../assets/cta/cta2.jpg'
-import rate from '../../assets/home/ratings.jpg'
 import { excursionCategories, excursions } from '../../data/excursionsData'
+import ExcursionCard from '../../components/ExcursionCard'
 
 {/*Data for the relevant sections*/ }
 const stats = [
@@ -103,16 +105,21 @@ export default function HomePage() {
   const [isLoadingReviews, setIsLoadingReviews] = useState(true)
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('one-day')
+  const [showAllExcursions, setShowAllExcursions] = useState(false)
 
-  const filteredExcursions = useMemo(() => {
+  const displayedExcursions = useMemo(() => {
+    if (showAllExcursions) {
+      return excursions
+    }
     return excursions.filter((trip) => trip.category === selectedCategory)
-  }, [selectedCategory])
+  }, [showAllExcursions, selectedCategory])
 
   // Sync category selection with Navbar clicks or URL parameters
   useEffect(() => {
     const handleCategoryEvent = (e) => {
       if (e.detail && ['one-day', 'two-day', 'special'].includes(e.detail)) {
         setSelectedCategory(e.detail)
+        setShowAllExcursions(false)
       }
     }
     window.addEventListener('select-excursion-category', handleCategoryEvent)
@@ -121,11 +128,21 @@ export default function HomePage() {
     const cat = params.get('category')
     if (cat && ['one-day', 'two-day', 'special'].includes(cat)) {
       setSelectedCategory(cat)
+      setShowAllExcursions(false)
     }
 
     if (location.hash === '#excursions') {
       setTimeout(() => {
         const el = document.getElementById('excursions')
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 150)
+    }
+
+    if (location.hash === '#reviews') {
+      setTimeout(() => {
+        const el = document.getElementById('reviews')
         if (el) {
           el.scrollIntoView({ behavior: 'smooth' })
         }
@@ -316,17 +333,26 @@ export default function HomePage() {
               <h2 className="font-display text-3xl sm:text-4xl md:text-5xl text-forest-dark mt-2 sm:mt-3">
                 Pick your tour.
               </h2>
+              {showAllExcursions && (
+                <p className="text-xs sm:text-sm text-forest-primary font-semibold mt-1.5 flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-forest-primary inline-block" />
+                  Showing all trips: One Day, Two Day & Special Trips ({displayedExcursions.length} excursions)
+                </p>
+              )}
             </div>
 
             {/* Category tabs: One-Day Trips, Two-Day Trips, Special Trips */}
             <div className="inline-flex p-1.5 bg-gray-200/80 rounded-full gap-1 border border-gray-300/60 self-start sm:self-auto overflow-x-auto max-w-full">
               {excursionCategories.map((cat) => {
-                const isActive = selectedCategory === cat.id
+                const isActive = !showAllExcursions && selectedCategory === cat.id
                 const isSpecial = cat.id === 'special'
                 return (
                   <button
                     key={cat.id}
-                    onClick={() => setSelectedCategory(cat.id)}
+                    onClick={() => {
+                      setSelectedCategory(cat.id)
+                      setShowAllExcursions(false)
+                    }}
                     className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer ${
                       isActive
                         ? isSpecial
@@ -345,73 +371,37 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
-            {filteredExcursions.map((trip, i) => (
-              <motion.div
-                key={`${trip.category}-${trip.id || i}`}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.35, delay: i * 0.05 }}
-                className="group relative rounded-xl sm:rounded-2xl overflow-hidden bg-white shadow-xs hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="relative h-28 sm:h-44 md:h-52 lg:h-56 overflow-hidden bg-slate-100">
-                    <img
-                      src={trip.image}
-                      alt={trip.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                    {trip.tag && (
-                      <span className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-white/90 text-forest-primary text-[10px] sm:text-xs font-semibold px-2 py-0.5 sm:px-3 sm:py-1 rounded-full">
-                        {trip.tag}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="p-3 sm:p-5 md:p-6">
-                    <h3 className="font-display text-xs sm:text-base md:text-lg text-forest-dark leading-snug line-clamp-2">
-                      {trip.title}
-                    </h3>
-                    {(trip.duration || trip.price) && (
-                      <div className="flex items-center justify-between mt-2 sm:mt-4 text-[11px] sm:text-sm text-gray-500">
-                        {trip.duration ? (
-                          <span className="flex items-center gap-1">
-                            <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> {trip.duration}
-                          </span>
-                        ) : <div />}
-                        {trip.price && (
-                          <span className="font-semibold text-forest-secondary">{trip.price}</span>
-                        )}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="pt-1 pb-3 px-2.5 sm:pt-3 sm:pb-6 sm:px-6">
-                  <button
-                    onClick={() =>
-                      navigate(
-                        `/excursions/${
-                          trip.slug ||
-                          trip.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
-                        }`
-                      )
-                    }
-                    className="text-white bg-forest-primary font-semibold hover:bg-forest-primary-light w-full text-center rounded-lg py-2 text-xs sm:text-sm transition-colors cursor-pointer"
-                  >
-                    Read More
-                  </button>
-                </div>
-              </motion.div>
+            {displayedExcursions.map((trip, i) => (
+              <ExcursionCard key={`${trip.category}-${trip.id || i}`} trip={trip} index={i} />
             ))}
           </div>
         </div>
         <div className="flex justify-center mt-16">
-          <Link
-            to="/excursions"
-            className=" inline-flex items-center gap-2 text-forest-primary font-semibold hover:bg-forest-primary hover:text-white rounded-full border px-8 py-3"
-          >
-            View All Excursions
-          </Link>
+          {!showAllExcursions ? (
+            <button
+              type="button"
+              onClick={() => setShowAllExcursions(true)}
+              className="inline-flex items-center gap-2 text-forest-primary font-semibold hover:bg-forest-primary hover:text-white rounded-full border border-forest-primary px-8 py-3 transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md"
+            >
+              <span>View All Excursions</span>
+              <ChevronDown className="w-4 h-4" />
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                setShowAllExcursions(false)
+                const el = document.getElementById('excursions')
+                if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' })
+                }
+              }}
+              className="inline-flex items-center gap-2 bg-forest-primary text-white font-semibold hover:bg-forest-primary-light rounded-full border border-forest-primary px-8 py-3 transition-all duration-200 cursor-pointer shadow-md hover:shadow-lg"
+            >
+              <span>Show Less</span>
+              <ChevronUp className="w-4 h-4" />
+            </button>
+          )}
         </div>
       </section>
 
@@ -452,7 +442,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Reviews ───────────────────────────────────────────────────── */}
-      <section className="bg-white py-24 px-6">
+      <section id="reviews" className="bg-white py-24 px-6 scroll-mt-24">
         <div className="max-w-3xl mx-auto text-center">
           <span className="text-xs uppercase tracking-[0.25em] text-forest-primary font-semibold">
             From the trail log
@@ -588,50 +578,38 @@ export default function HomePage() {
       </section>
 
       {/* ── TripAdvisor Rating ────────────────────────────────────────── */}
-      <section className="bg-gray-50 py-24 px-6 border-t border-gray-100">
-        <div className="max-w-5xl mx-auto">
+      <section className="bg-gray-50 py-20 px-6 border-t border-gray-100">
+        <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="bg-white rounded-3xl shadow-lg shadow-forest-dark/5 border border-gray-100 overflow-hidden grid grid-cols-1 md:grid-cols-2"
+            className="bg-white rounded-3xl shadow-lg shadow-forest-dark/5 border border-gray-100 p-8 sm:p-12 flex flex-col items-center text-center"
           >
-            {/* Screenshot */}
-            <div className="relative bg-gray-100">
-              <img
-                src={rate}
-                alt="TripAdvisor rating for Bentota Samantha Tours & Travels"
-                className="w-full h-full object-cover"
-              />
+            <div className="w-14 h-14 rounded-full bg-[#00AA6C] flex items-center justify-center mb-6 shadow-xs">
+              <FaTripadvisor className="w-8 h-8 text-black" />
             </div>
 
-            {/* Text + CTA */}
-            <div className="p-8 sm:p-12 flex flex-col justify-center">
-              <div className="w-12 h-12 rounded-full bg-forest-primary-light/95 flex items-center justify-center mb-6">
-                <FaTripadvisor className="w-6 h-6 text-forest-dark" />
-              </div>
+            <p className="text-forest-primary text-xs uppercase tracking-[0.3em] font-semibold mb-3">
+              Trusted by Travelers
+            </p>
+            <h2 className="font-display text-3xl sm:text-4xl text-forest-dark mb-4 leading-tight">
+              Rated by real travelers on TripAdvisor
+            </h2>
+            <p className="text-forest-text leading-relaxed mb-8 max-w-lg">
+              Every trip I run is reviewed publicly. See what past guests have said
+              before you book yours.
+            </p>
 
-              <p className="text-forest-primary text-xs uppercase tracking-[0.3em] font-semibold mb-3">
-                Trusted by Travelers
-              </p>
-              <h2 className="font-display text-3xl sm:text-4xl text-forest-dark mb-4 leading-tight">
-                Rated by real travelers on TripAdvisor
-              </h2>
-              <p className="text-forest-text leading-relaxed mb-8">
-                Every trip I run is reviewed publicly. See what past guests have said
-                before you book yours.
-              </p>
-
-              <Link
-                to="https://www.tripadvisor.com/Attraction_Review-g297895-d25310753-Reviews-Bentota_Samantha_Tours_Travels-Bentota_Galle_District_Southern_Province.html"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-forest-primary text-white font-semibold text-sm px-6 py-3.5 rounded-lg hover:bg-forest-primary-light transition-colors w-fit"
-              >
-                View Reviews on TripAdvisor <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
+            <Link
+              to="https://www.tripadvisor.com/Attraction_Review-g297895-d25310753-Reviews-Bentota_Samantha_Tours_Travels-Bentota_Galle_District_Southern_Province.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-forest-primary text-white font-semibold text-sm sm:text-base px-8 py-3.5 rounded-xl hover:bg-forest-primary-light transition-all shadow-md hover:shadow-lg cursor-pointer"
+            >
+              View Reviews on TripAdvisor <ArrowRight className="w-4 h-4" />
+            </Link>
           </motion.div>
         </div>
       </section>

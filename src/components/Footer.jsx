@@ -1,8 +1,9 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { FaFacebookF, FaTripadvisor, FaWhatsapp } from 'react-icons/fa'
 import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react'
-import logo from '../assets/logo/bstt logo footer.png'
+import logo from '../assets/logo/ChatGPT Image Sep 30, 2026, 10_37_52 PM.png'
 
 export default function Footer() {
   const [email, setEmail] = useState('')
@@ -16,7 +17,13 @@ export default function Footer() {
     { name: 'Contact Us', href: '/contact' }
   ]
 
-  const trailLinks = ['Ella Private Day Trip', 'Sinharaja Rainforest Trekking Private Day Trip', 'Galle & Benthota Full Day Tour From Colombo', 'Kandy Full Day Tour Private All Inclusive']
+  const popularTrips = [
+    { name: 'Ella', slug: 'ella' },
+    { name: 'Hikkaduwa', slug: 'hikkaduwa' },
+    { name: 'Yala Safari', slug: 'yala-safari' },
+    { name: 'Bentota boat safari', slug: 'bentota-boat-safari' },
+    { name: 'Kandy-Nuwara Eliya', slug: 'kandy-nuwara-eliya' },
+  ]
 
   return (
     <footer className="relative bg-forest-dark text-gray-300 overflow-hidden">
@@ -49,38 +56,47 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 pb-16 border-b border-white/10">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <img src={logo} alt="Logo" className="w-96 object-contain" />
+            <div className="flex items-center gap-2 mb-5">
+              <img
+                src={logo}
+                alt="Bentota Samantha Tours & Travels"
+                className="h-14 sm:h-16 w-auto object-contain bg-white rounded-2xl px-3.5 py-2 shadow-md"
+              />
             </div>
             <p className="text-sm leading-relaxed text-gray-400 max-w-sm">
               Guided excursions and wild places, run by people who know the trails.
               Every trip is scouted, every guide is local.
             </p>
 
-            <div className="flex gap-3 mt-6">
-
+            <div className="flex items-center gap-3.5 mt-6">
               <a
                 href='https://www.tripadvisor.com/Attraction_Review-g297895-d25310753-Reviews-Bentota_Samantha_Tours_Travels-Bentota_Galle_District_Southern_Province.html'
                 target='_blank'
-                className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-gray-400 hover:text-forest-dark hover:bg-forest-primary-light hover:border-forest-primary-light transition-colors duration-300"
+                rel="noopener noreferrer"
+                aria-label="TripAdvisor"
+                className="w-10 h-10 rounded-full bg-[#00AA6C] hover:bg-[#008f5a] flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-md cursor-pointer"
               >
-                <FaTripadvisor className="w-4 h-4" strokeWidth={1.5} />
+                <FaTripadvisor className="w-5 h-5 text-white" />
               </a>
 
               <a
                 href='https://web.facebook.com/bentotasamantha'
                 target='_blank'
-                className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-gray-400 hover:text-forest-dark hover:bg-forest-primary-light hover:border-forest-primary-light transition-colors duration-300"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="w-10 h-10 rounded-full bg-[#1877F2] hover:bg-[#166fe5] flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-md cursor-pointer"
               >
-                <FaFacebookF className="w-4 h-4" strokeWidth={1.5} />
+                <FaFacebookF className="w-4.5 h-4.5 text-white" />
               </a>
 
               <a
                 href='https://wa.me/94772408371'
                 target='_blank'
-                className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-gray-400 hover:text-forest-dark hover:bg-forest-primary-light hover:border-forest-primary-light transition-colors duration-300"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+                className="w-10 h-10 rounded-full bg-[#25D366] hover:bg-[#20ba5a] flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-md cursor-pointer"
               >
-                <FaWhatsapp className="w-4 h-4" strokeWidth={1.5} />
+                <FaWhatsapp className="w-5 h-5 text-white" />
               </a>
             </div>
           </div>
@@ -93,9 +109,9 @@ export default function Footer() {
             <ul className="space-y-3">
               {exploreLinks.map((item) => (
                 <li key={item.name}>
-                  <a href={item.href} className="text-sm text-gray-400 hover:text-forest-primary-light transition-colors">
+                  <Link to={item.href} className="text-sm text-gray-400 hover:text-forest-primary-light transition-colors">
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -104,11 +120,14 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-semibold text-sm uppercase tracking-wider mb-5">Popular Trips</h4>
             <ul className="space-y-3">
-              {trailLinks.map((item) => (
-                <li key={item}>
-                  <a href="#" className="text-sm text-gray-400 hover:text-forest-primary-light transition-colors">
-                    {item}
-                  </a>
+              {popularTrips.map((trip) => (
+                <li key={trip.name}>
+                  <Link
+                    to={`/excursions/${trip.slug}`}
+                    className="text-sm text-gray-400 hover:text-forest-primary-light transition-colors"
+                  >
+                    {trip.name}
+                  </Link>
                 </li>
               ))}
             </ul>

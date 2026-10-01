@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight, Compass } from 'lucide-react'
 import { excursionCategories, excursions } from '../../data/excursionsData'
+import ExcursionCard from '../../components/ExcursionCard'
 
 export default function ExcursionsPage() {
   const navigate = useNavigate()
@@ -68,53 +69,11 @@ export default function ExcursionsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredExcursions.map((trip, i) => (
-            <motion.div
+            <ExcursionCard
               key={`${trip.category}-${trip.id || i}`}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.35, delay: i * 0.05 }}
-              className="group relative rounded-2xl overflow-hidden bg-white shadow-xs hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between border border-gray-100"
-            >
-              <div>
-                <div className="relative h-48 sm:h-56 overflow-hidden bg-slate-100">
-                  <img
-                    src={trip.image}
-                    alt={trip.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  {trip.tag && (
-                    <span className="absolute top-3 left-3 bg-white/95 backdrop-blur-xs text-forest-primary text-xs font-bold px-3 py-1 rounded-full shadow-xs">
-                      {trip.tag}
-                    </span>
-                  )}
-                </div>
-
-                <div className="p-5 sm:p-6">
-                  <h3 className="font-display text-lg sm:text-xl text-forest-dark leading-snug line-clamp-1">
-                    {trip.title}
-                  </h3>
-                  <p className="text-gray-500 text-xs sm:text-sm line-clamp-2 mt-2 leading-relaxed">
-                    {trip.overview}
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-5 sm:p-6 pt-0">
-                <button
-                  onClick={() =>
-                    navigate(
-                      `/excursions/${
-                        trip.slug ||
-                        trip.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
-                      }`
-                    )
-                  }
-                  className="text-white bg-forest-primary font-semibold hover:bg-forest-primary-light w-full text-center rounded-xl py-2.5 text-xs sm:text-sm transition-colors cursor-pointer flex items-center justify-center gap-1.5"
-                >
-                  Read More <ArrowRight className="w-4 h-4" />
-                </button>
-              </div>
-            </motion.div>
+              trip={trip}
+              index={i}
+            />
           ))}
         </div>
       </div>

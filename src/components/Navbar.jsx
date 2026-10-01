@@ -9,7 +9,8 @@ const links = [
   { to: '/about', label: 'About' },
   { to: '/excursions', label: 'Excursions', isDropdown: true },
   { to: '/activities', label: 'Activities' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/#reviews', label: 'Reviews', isReview: true },
+  { to: '/contact', label: 'Contact', isContactButton: true },
 ]
 
 export default function Navbar() {
@@ -35,6 +36,19 @@ export default function Navbar() {
       mainEl.scrollTo({ top: 0, behavior: 'smooth' })
     }
     setMenuOpen(false)
+  }
+
+  const handleReviewClick = (e) => {
+    e?.preventDefault()
+    setMenuOpen(false)
+    if (location.pathname === '/') {
+      const el = document.getElementById('reviews')
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      navigate('/#reviews')
+    }
   }
 
   const handleExcursionClick = (categoryId) => {
@@ -86,7 +100,7 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-8 font-nav">
-          {links.map(({ to, label, isDropdown }) => {
+          {links.map(({ to, label, isDropdown, isContactButton, isReview }) => {
             if (isDropdown) {
               const isExcursionActive =
                 location.pathname === '/excursions' || location.hash === '#excursions'
@@ -145,6 +159,45 @@ export default function Navbar() {
               )
             }
 
+            if (isContactButton) {
+              const isContactActive = location.pathname === '/contact'
+              return (
+                <li key={to}>
+                  <NavLink
+                    to={to}
+                    className={`inline-flex items-center justify-center px-6 py-2.5 rounded-full font-bold text-sm tracking-wider uppercase transition-all duration-200 cursor-pointer ${
+                      isContactActive
+                        ? 'bg-forest-primary text-white shadow-sm ring-2 ring-forest-primary ring-offset-2'
+                        : 'bg-forest-primary text-white hover:bg-forest-primary-light shadow-xs hover:shadow-md hover:scale-105 active:scale-95'
+                    }`}
+                  >
+                    {label}
+                  </NavLink>
+                </li>
+              )
+            }
+
+            if (isReview) {
+              const isReviewActive = location.hash === '#reviews'
+              return (
+                <li key={to}>
+                  <button
+                    onClick={handleReviewClick}
+                    className={`relative py-1 text-sm font-bold tracking-wider uppercase transition-colors duration-200 font-nav cursor-pointer ${
+                      isReviewActive
+                        ? 'text-forest-primary'
+                        : 'text-slate-700 hover:text-forest-primary'
+                    }`}
+                  >
+                    {label}
+                    {isReviewActive && (
+                      <span className="absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-forest-primary rounded-full" />
+                    )}
+                  </button>
+                </li>
+              )
+            }
+
             return (
               <li key={to}>
                 <NavLink
@@ -197,7 +250,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-lg font-nav">
           <ul className="flex flex-col px-6 py-4 gap-2">
-            {links.map(({ to, label, isDropdown }) => {
+            {links.map(({ to, label, isDropdown, isContactButton, isReview }) => {
               if (isDropdown) {
                 return (
                   <li key={to} className="py-1">
@@ -234,6 +287,33 @@ export default function Navbar() {
                         })}
                       </div>
                     )}
+                  </li>
+                )
+              }
+
+              if (isContactButton) {
+                return (
+                  <li key={to} className="pt-2">
+                    <NavLink
+                      to={to}
+                      onClick={() => setMenuOpen(false)}
+                      className="w-full inline-flex items-center justify-center px-6 py-3 rounded-full bg-forest-primary text-white font-bold text-sm tracking-wider uppercase hover:bg-forest-primary-light transition-all shadow-sm"
+                    >
+                      {label}
+                    </NavLink>
+                  </li>
+                )
+              }
+
+              if (isReview) {
+                return (
+                  <li key={to}>
+                    <button
+                      onClick={handleReviewClick}
+                      className="w-full text-left text-sm font-bold tracking-wider uppercase py-2 text-slate-700 hover:text-forest-primary transition-colors cursor-pointer font-nav"
+                    >
+                      {label}
+                    </button>
                   </li>
                 )
               }

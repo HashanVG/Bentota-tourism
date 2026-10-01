@@ -1,3 +1,4 @@
+// One Day Trip Assets
 import colomboImg from '../assets/one day trip/colombo.jpg';
 import ellaImg from '../assets/one day trip/ella.jpg';
 import galleImg from '../assets/one day trip/galle.jpg';
@@ -9,6 +10,20 @@ import sigiriyaImg from '../assets/one day trip/sigiriya.jpg';
 import sinharajaImg from '../assets/one day trip/sinharaja.jpg';
 import udawalawaImg from '../assets/one day trip/udawalawa.jpg';
 import yalaImg from '../assets/one day trip/yala.jpg';
+
+// Two Day Trip Assets
+import dambulla2Img from '../assets/2 nd day/dambulla.jpg';
+import ella2Img from '../assets/2 nd day/ella.jpg';
+import galle2Img from '../assets/2 nd day/galle.jpg';
+import kandy2Img from '../assets/2 nd day/kandy.jpg';
+import nuwaraEliya2Img from '../assets/2 nd day/nuwara eliya.jpg';
+import sigiriya2Img from '../assets/2 nd day/sigiriya.jpg';
+import udawalawa2Img from '../assets/2 nd day/udawalawa.jpg';
+import yala2Img from '../assets/2 nd day/yala.jpg';
+
+// Special Trip Assets
+import bentotaBoatImg from '../assets/special/1.webp';
+import birdWatchingImg from '../assets/special/bird watching.jpg';
 
 export const excursionCategories = [
   { id: 'one-day', label: 'One Day Trips' },
@@ -24,40 +39,14 @@ export const excursions = [
     slug: 'udawalawa-safari',
     title: 'Udawalawa Safari',
     duration: '',
-    fullDuration: 'Full Day (approx. 9 - 10 Hours)',
-    departure: '05:30 AM from Bentota / Beruwala / Aluthgama',
-    price: '',
     image: udawalawaImg,
-    tag: 'Wildlife Safari',
-    overview: 'Experience the untamed beauty of Udawalawe National Park, world-renowned for its thriving wild elephant herds. Located in the southern dry zone of Sri Lanka, this safari offers guaranteed sightings of elephants in their natural habitat, alongside water buffaloes, spotted deer, wild boars, crocodiles, and diverse endemic bird species.',
-    highlights: [
-      'Open-top 4x4 rugged Jeep safari through Udawalawe National Park',
-      'Guaranteed close-up encounters with wild elephant herds & calves',
-      'Visit to the Udawalawe Elephant Transit Home during feeding session',
-      'Spot crocodiles, monitor lizards, water buffaloes, and endemic birds',
-      'Panoramic scenic drive through lush southern countryside & reservoirs'
-    ],
-    included: [
-      'Private air-conditioned vehicle with dedicated driver-guide',
-      'Hotel pick-up and drop-off from Bentota and surrounding areas',
-      'Private 4x4 safari jeep with tracker inside the park',
-      'Fuel, highway tolls, and parking charges',
-      'Complimentary bottled water'
-    ],
-    whatToBring: [
-      'Comfortable lightweight cotton clothing',
-      'Sun hat, sunglasses, and sunscreen',
-      'Camera with zoom lens / binoculars',
-      'Cash for national park entry tickets & personal lunch'
-    ],
-    itinerary: [
-      { time: '05:30 AM', activity: 'Pick-up from your hotel in Bentota / surrounding coastal towns' },
-      { time: '08:45 AM', activity: 'Arrive at Udawalawe & board your open-top 4x4 safari jeep' },
-      { time: '09:00 AM', activity: '3-hour guided game drive tracking wild elephants and wildlife' },
-      { time: '12:00 PM', activity: 'Visit the Udawalawe Elephant Transit Home for baby elephant feeding' },
-      { time: '01:00 PM', activity: 'Traditional Sri Lankan rice and curry lunch at a local restaurant' },
-      { time: '02:30 PM', activity: 'Relaxing return journey through the southern landscape' },
-      { time: '05:30 PM', activity: 'Safe drop-off back at your hotel' }
+    tag: 'One Day',
+    overview: 'Udawalawe National Park is Sri Lanka\'s premier sanctuary for wild Asian elephants, home to over 500 elephants roaming freely across 30,000 hectares of dry-zone savannah, reservoirs, and scrublands.',
+    paragraphs: [
+      'Udawalawe National Park is Sri Lanka\'s premier sanctuary for wild Asian elephants, established in 1972 to provide a protected haven for wildlife displaced by the construction of the massive Udawalawe Reservoir. Covering over 30,000 hectares of southern dry-zone savannah, scrublands, and riverine forests framed by the dramatic Kaltota mountain range, it is celebrated as one of the best places on earth to observe wild elephants interacting freely in their natural herds.',
+      'Unlike dense jungle parks where animals can be difficult to spot, Udawalawe\'s open grasslands and scattered teak forests provide unobstructed visibility. An open-top 4x4 safari jeep allows visitors to encounter herds of mothers and playful baby calves bathing along the reservoir shores, mud-wallowing in watering holes, and feeding on tall guinea grass. The park supports a thriving population of over 500 elephants year-round, making sightings virtually guaranteed on every safari.',
+      'Beyond elephants, Udawalawe is rich in biodiversity. Sluggish mugger crocodiles bask along the muddy banks of the Walawe River, while spotted deer, sambar, golden jackals, wild boars, and water buffaloes roam the plains. Birdwatchers are treated to over 180 avian species, including crested serpent eagles, grey-headed fish eagles, painted storks, white-bellied sea eagles, and dazzling flocks of green bee-eaters and peacocks.',
+      'A highlight of visiting Udawalawe is the nearby Elephant Transit Home (ETH), supported by the Born Free Foundation. Here, orphaned baby elephants rescued from across the island are cared for, bottle-fed, and rehabilitated in a natural environment until they are strong enough to be released back into the wild herds.'
     ]
   },
   {
@@ -66,39 +55,14 @@ export const excursions = [
     slug: 'yala-safari',
     title: 'Yala Safari',
     duration: '',
-    fullDuration: 'Full Day (approx. 11 - 12 Hours)',
-    departure: '04:30 AM from Bentota / Beruwala',
-    price: '',
     image: yalaImg,
-    tag: 'Big Game Wildlife',
-    overview: 'Journey to Yala National Park, Sri Lanka\'s premier wildlife sanctuary boasting one of the world\'s highest leopard densities. Traverse dense scrub jungle, brackish lagoons, and coastal plains aboard a rugged 4x4 safari jeep while tracking leopards, sloth bears, wild elephants, jackals, and majestic peacocks in their raw natural habitat.',
-    highlights: [
-      'Thrilling safari tracking the elusive Sri Lankan Leopard (Panthera pardus kotiya)',
-      'Opportunity to spot sloth bears, wild elephants, crocodiles, and jackals',
-      'Traverse stunning diverse ecosystems from coastal dunes to monsoon scrub',
-      'Magnificent birdwatching around brackish lagoons & coastal wetlands',
-      'Scenic southern coastal highway journey'
-    ],
-    included: [
-      'Private air-conditioned car or van with experienced driver',
-      'Hotel pick-up & drop-off anywhere in Bentota area',
-      'Private open-top 4x4 Safari Jeep at Yala National Park',
-      'Fuel, highway tolls, and parking fees',
-      'Bottled drinking water throughout the day'
-    ],
-    whatToBring: [
-      'Neutral-toned safari clothing (khaki, olive, light brown)',
-      'Binoculars and high-zoom camera',
-      'Sunscreen, hat, and sunglasses',
-      'Cash for park entrance permits and lunch'
-    ],
-    itinerary: [
-      { time: '04:30 AM', activity: 'Early morning hotel pick-up from Bentota / coastal resort' },
-      { time: '08:30 AM', activity: 'Reach Yala gate and meet your expert 4x4 safari jeep driver' },
-      { time: '09:00 AM', activity: 'Extensive wildlife tracking for leopards, elephants & bears' },
-      { time: '01:00 PM', activity: 'Lunch break at a scenic spot or local safari lodge' },
-      { time: '02:30 PM', activity: 'Scenic coastal drive back along the southern expressway' },
-      { time: '05:30 PM', activity: 'Arrival back at your hotel in Bentota' }
+    tag: 'One Day',
+    overview: 'Yala National Park is Sri Lanka\'s most famous wildlife destination, renowned worldwide for boasting one of the highest leopard densities on the planet alongside sloth bears and wild elephants.',
+    paragraphs: [
+      'Yala National Park, situated along Sri Lanka\'s southeastern coastline, is the island\'s most celebrated and second-largest national park. Spanning nearly 1,000 square kilometers, Yala is world-renowned for having one of the highest densities of leopards on the planet (Panthera pardus kotiya), an endemic subspecies that reigns as the apex predator of Sri Lanka\'s wilderness.',
+      'The park\'s terrain is remarkably diverse and photogenic, transitioning from dense semi-deciduous monsoon forest to open thorny scrubland, freshwater lakes, brackish coastal lagoons, and towering granite boulder outcrops. These dramatic rock formations often serve as vantage points and sunbathing rocks for leopards, offering thrilling opportunities for wildlife photographers and safari travelers.',
+      'In addition to the famous leopards, Yala is home to the shaggy Sri Lankan sloth bear, herds of wild Asian elephants, elusive fishing cats, spotted deer, wild boars, jackals, and both mugger and estuarine crocodiles. The park\'s coastal boundary and saltwater lagoons attract tremendous flocks of waterbirds, including black-necked storks, flamingos, pelicans, and Eurasian spoonbills.',
+      'Yala also holds deep historical and spiritual significance. Ancient monastic cave hermitages and stupa ruins dating back to the 2nd century BC, such as Sithulpawwa Rock Temple and Magul Maha Viharaya, lie nestled within the jungle, indicating that this untamed wilderness once thrived as part of the ancient Ruhuna Kingdom.'
     ]
   },
   {
@@ -107,41 +71,14 @@ export const excursions = [
     slug: 'sinharaja-rain-forest',
     title: 'Sinharaja Rain Forest',
     duration: '',
-    fullDuration: 'Full Day (approx. 8 - 9 Hours)',
-    departure: '06:00 AM from Bentota',
-    price: '',
     image: sinharajaImg,
-    tag: 'UNESCO Biosphere Reserve',
-    overview: 'Immerse yourself in the prehistoric wonder of Sinharaja Forest Reserve, a UNESCO World Heritage Site and Sri Lanka\'s last viable primary tropical rainforest. Guided by an experienced local naturalist, trek beneath towering emerald canopies, discover rare medicinal plants, and encounter vibrant endemic wildlife including the Sri Lanka Blue Magpie and purple-faced langur.',
-    highlights: [
-      'Guided trek inside a pristine UNESCO World Heritage virgin rainforest',
-      'Encounter rare endemic bird species, reptiles, butterflies, and amphibians',
-      'Marvel at towering tropical trees, wild orchids, and medicinal flora',
-      'Take a refreshing swim in crystal-clear natural jungle stream pools & waterfalls',
-      'Learn about deep tropical ecology from a certified local naturalist'
-    ],
-    included: [
-      'Private air-conditioned transportation from your hotel',
-      'Certified English-speaking rainforest tracker & naturalist guide',
-      'Leech protection socks for safe, comfortable hiking',
-      'All fuel, expressway tolls, and entry assistance',
-      'Chilled bottled water and tropical fresh fruit refreshments'
-    ],
-    whatToBring: [
-      'Comfortable hiking shoes or trainers with good grip',
-      'Light breathable cotton clothing with long pants',
-      'Swimwear and small towel for the waterfall dip',
-      'Rain jacket or poncho (showers are common in the rainforest)',
-      'Insect repellent'
-    ],
-    itinerary: [
-      { time: '06:00 AM', activity: 'Departure from Bentota through scenic rubber and tea estates' },
-      { time: '08:30 AM', activity: 'Arrive at Sinharaja Reserve entrance & meet certified naturalist' },
-      { time: '09:00 AM', activity: 'Begin 3.5 to 4-hour guided trek exploring deep forest canopy' },
-      { time: '11:30 AM', activity: 'Stop at secluded jungle waterfall for rest and refreshing swim' },
-      { time: '01:00 PM', activity: 'Authentic village-style Sri Lankan buffet lunch overlooking the forest' },
-      { time: '02:30 PM', activity: 'Return drive through rural hill country villages' },
-      { time: '05:00 PM', activity: 'Arrive safely back at your hotel in Bentota' }
+    tag: 'One Day',
+    overview: 'Sinharaja Forest Reserve is a UNESCO World Heritage Site and Sri Lanka\'s last remaining viable tract of primary tropical rainforest, teeming with rare endemic wildlife and prehistoric canopies.',
+    paragraphs: [
+      'Sinharaja Forest Reserve, inscribed as a UNESCO World Heritage Site and Biosphere Reserve, is Sri Lanka\'s last remaining viable tract of primary lowland tropical rainforest. Stretching across a rugged east-west ridge in the southwestern wet zone, this ancient jungle has evolved over millions of years, escaping major glaciation and resulting in an extraordinary concentration of endemic species found nowhere else on earth.',
+      'Stepping beneath Sinharaja\'s towering emerald canopy immerses you in an ancient, living world. Dense curtains of climbing lianas, giant ferns, wild orchids, and medicinal flora thrive in the humid, misty atmosphere. Over 60% of the trees in Sinharaja are endemic to Sri Lanka, with many towering over 40 meters high to form a multi-layered canopy that shelters rare wildlife from forest floor to canopy crown.',
+      'Sinharaja is world-famous among naturalists for its remarkable \'mixed-species bird feeding flocks\'—an incredible phenomenon where up to 40 different bird species travel and forage together through the trees. Visitors can spot striking endemics including the Sri Lanka Blue Magpie, Red-faced Malkoha, Serendib Scops Owl, Green-billed Coucal, and Orange-billed Babbler, alongside purple-faced langurs and the endangered Sri Lanka leopard.',
+      'Pristine mountain streams and hidden waterfalls weave throughout the forest trails. A guided trek along the leafy paths leads to cascading pools of crystalline mountain water, where travelers can take a refreshing, rejuvenating swim surrounded by the sounds of singing cicadas and tropical birds.'
     ]
   },
   {
@@ -150,40 +87,14 @@ export const excursions = [
     slug: 'galle',
     title: 'Galle',
     duration: '',
-    fullDuration: 'Full Day (approx. 6 - 7 Hours)',
-    departure: '08:30 AM from Bentota',
-    price: '',
     image: galleImg,
-    tag: 'UNESCO Heritage & Coast',
-    overview: 'Step back in time within the grand ramparts of Galle Dutch Fort, a living 17th-century UNESCO World Heritage monument. Stroll along cobblestone pathways lined with colonial Dutch and Portuguese architecture, boutique cafes, artisan jewelers, and the iconic Galle Lighthouse overlooking the azure Indian Ocean.',
-    highlights: [
-      'Walk along the historic 17th-century ramparts and ocean-facing bastions',
-      'Visit the iconic 1939 Galle Lighthouse and Dutch Reformed Church',
-      'Explore charming boutique streets, artisan gem shops, and colonial cafes',
-      'See traditional stilt fishermen balancing over ocean waves at Koggala',
-      'Visit a Sea Turtle Conservation Project and herbal spice garden'
-    ],
-    included: [
-      'Private luxury AC car or minivan with English-speaking chauffeur',
-      'Door-to-door hotel pick-up and drop-off',
-      'Guided walking tour through Galle Fort\'s key historical sites',
-      'All highway tolls, fuel, and parking fees',
-      'Cold bottled water'
-    ],
-    whatToBring: [
-      'Comfortable walking shoes or sandals',
-      'Camera, sun hat, and sunglasses',
-      'Modest attire covering knees and shoulders for temple/church visits',
-      'Spending money for shopping and dining'
-    ],
-    itinerary: [
-      { time: '08:30 AM', activity: 'Pick-up from your hotel in Bentota' },
-      { time: '09:15 AM', activity: 'Visit a Sea Turtle Hatchery & Conservation Centre' },
-      { time: '10:30 AM', activity: 'Arrive at Galle Dutch Fort for a guided walking heritage tour' },
-      { time: '12:30 PM', activity: 'Leisurely lunch at a historic fort courtyard restaurant' },
-      { time: '01:45 PM', activity: 'Free time for artisan shopping and photos by the lighthouse' },
-      { time: '03:00 PM', activity: 'Stop to witness traditional stilt fishermen along the coast' },
-      { time: '04:30 PM', activity: 'Comfortable return drop-off at your hotel' }
+    tag: 'One Day',
+    overview: 'Galle Dutch Fort is a 17th-century UNESCO World Heritage monument where ancient stone ramparts meet cobblestone streets, colonial villas, boutique cafes, and the iconic oceanfront lighthouse.',
+    paragraphs: [
+      'Galle is the jewel of Sri Lanka\'s southern coastline, celebrated for its legendary Dutch Fort—a UNESCO World Heritage Site originally founded by the Portuguese in 1505 and extensively fortified by the Dutch East India Company throughout the 17th century. Enclosed by massive coral and granite ramparts, this fortified living citadel has stood resilient for over four centuries against ocean swells and historic sieges, serving as a crossroads of world trade and colonial maritime heritage.',
+      'Walking through the historic stone archway of the fort feels like stepping into a romantic bygone era. The narrow cobblestone streets are flanked by red-tiled Dutch colonial villas with pillared verandas, blooming bougainvillea, and ornate wrought-iron gates. Today, these heritage buildings house artisan gemstone jewelers, boutique perfume houses, handmade lace workshops, antique galleries, and atmospheric open-air cafes offering aromatic Ceylon tea and international cuisine.',
+      'Key landmarks within the ramparts include the towering 1939 white Galle Lighthouse perched on the oceanfront Point Utrecht Bastion, the historic Dutch Reformed Church built in 1755 with carved tombstones embedded into the floor, the Dutch Hospital heritage shopping precinct, and the historic Clock Tower overlooking the cricket stadium. From the elevated western ramparts, travelers gather in the late afternoon to witness unforgettable golden sunsets over the Indian Ocean while local cliff divers plunge into the turquoise waves below.',
+      'Beyond the ramparts, the journey along the southern coastline treats visitors to unique coastal culture, including traditional stilt fishermen balancing on narrow wooden poles at Koggala, nearby sea turtle conservation hatcheries protecting vulnerable olive ridley and green turtles, and traditional southern mask-carving workshops.'
     ]
   },
   {
@@ -192,39 +103,14 @@ export const excursions = [
     slug: 'hikkaduwa',
     title: 'Hikkaduwa',
     duration: '',
-    fullDuration: 'Half Day to Full Day (approx. 5 - 6 Hours)',
-    departure: '08:30 AM from Bentota',
-    price: '',
     image: hikkaduwaImg,
-    tag: 'Beaches & Coral Reef',
-    overview: 'Discover the lively coastal paradise of Hikkaduwa, celebrated for its golden beaches, vibrant coral reefs, and gentle giant sea turtles. Wade into the crystal-clear ocean shallows to hand-feed wild sea turtles, take an optional glass-bottom boat tour across the Marine National Park, or explore local surf breaks and vibrant beachside cafes.',
-    highlights: [
-      'Encounter wild giant sea turtles swimming right up to the shore',
-      'Optional glass-bottom boat cruise over vibrant coral reef gardens',
-      'Visit the Tsunami Memorial & Community Photo Museum at Telwatta',
-      'Explore vibrant local surf shops, beach cafes, and souvenir stalls',
-      'Relax on the sun-kissed golden sands of Hikkaduwa Beach'
-    ],
-    included: [
-      'Private air-conditioned transport with dedicated driver',
-      'Pick-up and return transfer to your hotel in Bentota',
-      'Assistance with sea turtle viewing on the beach',
-      'Highway tolls and fuel',
-      'Chilled mineral water'
-    ],
-    whatToBring: [
-      'Swimwear, beach towel, and change of clothes',
-      'Sun protection (biodegradable sunscreen, hat, sunglasses)',
-      'Waterproof phone pouch or underwater camera',
-      'Cash for boat rides, snacks, or souvenirs'
-    ],
-    itinerary: [
-      { time: '08:30 AM', activity: 'Depart from your Bentota accommodation' },
-      { time: '09:15 AM', activity: 'Visit the Tsunami Photo Museum & towering Buddha statue' },
-      { time: '10:00 AM', activity: 'Arrive at Hikkaduwa Beach and encounter giant green sea turtles' },
-      { time: '11:00 AM', activity: 'Optional glass-bottom boat coral reef tour or snorkeling' },
-      { time: '12:30 PM', activity: 'Relaxing lunch and fresh tropical juices at a beachside cafe' },
-      { time: '02:00 PM', activity: 'Return drive back to Bentota' }
+    tag: 'One Day',
+    overview: 'Hikkaduwa is a lively coastal paradise famous for its golden sand beaches, marine national park, coral gardens, and giant sea turtles that swim directly to the beach shoreline.',
+    paragraphs: [
+      'Hikkaduwa is one of Sri Lanka\'s most iconic coastal destinations, famous since the 1970s for its sun-drenched golden beaches, world-class surf breaks, and magnificent coral reef sanctuary. Located just south of Bentota along the scenic Galle Road, Hikkaduwa combines laid-back tropical beach charm with lively seaside cafes, surf schools, and marine adventures.',
+      'The town\'s crown jewel is the Hikkaduwa Coral Sanctuary, Sri Lanka\'s first marine national park. This shallow coastal reef system is home to over 60 species of hard corals and an astonishing diversity of colorful reef fish, including angel fish, butterfly fish, moray eels, and blacktip reef sharks. Visitors can easily explore this underwater wonderland by snorkeling or taking a leisurely glass-bottom boat excursion.',
+      'One of Hikkaduwa\'s most beloved attractions is the shoreline turtle gathering. Every morning and afternoon, giant wild green sea turtles swim directly up to the calm shallow waters right off the beach. Visitors can stand knee-deep in the gentle ocean waves and hand-feed these gentle giants fresh seaweed under the care of local conservation volunteers.',
+      'The town also preserves touching history and culture. Nearby in Telwatta stands the towering 30-meter Tsunami Buddha Memorial statue, a poignant gift from Japan, and the Tsunami Community Museum which commemorates the resilience of the southern coastal communities.'
     ]
   },
   {
@@ -233,38 +119,14 @@ export const excursions = [
     slug: 'mirissa-whale-watching',
     title: 'Mirissa (Whale Watching)',
     duration: '',
-    fullDuration: 'Full Day (approx. 7 - 8 Hours)',
-    departure: '05:00 AM from Bentota',
-    price: '',
     image: mirissaImg,
-    tag: 'Ocean Wildlife Safari',
-    overview: 'Embark on an exhilarating ocean voyage into the deep waters off Mirissa, one of the best locations on earth to witness giant Blue Whales—the largest creatures to have ever lived on our planet. Watch in awe as these gentle ocean giants breach and surface alongside acrobatic pods of spinner dolphins.',
-    highlights: [
-      'Witness giant Blue Whales and Sperm Whales in their natural ocean migration route',
-      'Watch playful pods of spinner dolphins jumping and riding boat bow waves',
-      'Comfortable cruise with safety equipment, life jackets, and experienced crew',
-      'Visit the iconic Coconut Tree Hill panoramic viewpoint overlooking Mirissa Bay',
-      'Scenic coastal drive along southern Sri Lanka\'s picturesque beaches'
-    ],
-    included: [
-      'Private air-conditioned car transfer from Bentota to Mirissa harbor and back',
-      'Assistance at the harbor boarding point',
-      'Highway tolls, fuel, and parking fees',
-      'Bottled drinking water'
-    ],
-    whatToBring: [
-      'Motion sickness tablets (if sensitive to ocean swell)',
-      'Camera with good zoom and strap',
-      'Light jacket or windbreaker for morning sea breeze',
-      'Sunscreen and sunglasses'
-    ],
-    itinerary: [
-      { time: '05:00 AM', activity: 'Early morning departure from Bentota via Southern Expressway' },
-      { time: '06:15 AM', activity: 'Arrive at Mirissa Harbor and board your licensed whale watching vessel' },
-      { time: '06:45 AM', activity: 'Set sail into the Indian Ocean; 3 to 4-hour whale & dolphin search' },
-      { time: '10:30 AM', activity: 'Return to harbor and proceed to Coconut Tree Hill for stunning photos' },
-      { time: '12:00 PM', activity: 'Fresh seafood lunch at a beachside restaurant in Mirissa' },
-      { time: '01:30 PM', activity: 'Comfortable return drive back to Bentota' }
+    tag: 'One Day',
+    overview: 'Mirissa is world-famous as one of the best spots on earth to witness giant Blue Whales, sperm whales, and super-pods of acrobatic spinner dolphins in their natural ocean migration route.',
+    paragraphs: [
+      'Mirissa is a breathtaking crescent bay on the southern tip of Sri Lanka, globally celebrated as one of the premier locations on earth for whale and dolphin watching. Just a few nautical miles off the coast of Mirissa, the continental shelf plunges precipitously into deep oceanic trenches, bringing nutrient-rich deep currents close to the shore and attracting migratory marine megafauna.',
+      'Between November and April, the ocean waters off Mirissa become a prime gathering and feeding route for Blue Whales—the largest creatures to have ever existed on planet Earth, growing up to 30 meters in length and weighing over 150 tons. Witnessing the colossal blue-grey back of a blue whale surface, blast a powerful vapor spout 10 meters into the morning sky, and gracefully lift its massive tail fluke before diving into the abyss is a truly humbling, once-in-a-lifetime experience.',
+      'In addition to blue whales, these rich waters are frequently visited by sperm whales, fin whales, Bryde\'s whales, and occasional pods of killer whales (orcas). Enormous super-pods of acrobatic spinner dolphins and bottlenose dolphins often accompany the tour boats, leaping high out of the sparkling ocean swells and riding the bow waves in joyful synchrony.',
+      'Back on terra firma, Mirissa charms visitors with its picturesque curved beach, coconut palms swaying over turquoise waters, and the famous Coconut Tree Hill—a scenic red-dirt promontory studded with towering palm trees overlooking the azure bay, renowned worldwide as one of Sri Lanka\'s most photogenic coastal viewpoints.'
     ]
   },
   {
@@ -273,39 +135,14 @@ export const excursions = [
     slug: 'kandy',
     title: 'Kandy',
     duration: '',
-    fullDuration: 'Full Day (approx. 10 - 12 Hours)',
-    departure: '05:30 AM from Bentota',
-    price: '',
     image: kandyImg,
-    tag: 'Cultural Heritage Capital',
-    overview: 'Journey to the sacred cultural capital of Sri Lanka, nestled amidst misty central highlands. Visit the venerable Temple of the Sacred Tooth Relic (Sri Dalada Maligawa), explore the lush Peradeniya Royal Botanical Gardens featuring centuries-old giant palms and orchid houses, and witness breathtaking hill country landscapes.',
-    highlights: [
-      'Visit the revered Temple of the Tooth Relic (Sri Dalada Maligawa)',
-      'Walk among 4,000+ plant species at Peradeniya Royal Botanical Gardens',
-      'Scenic scenic drive through lush rubber, spice, and pineapple plantations',
-      'Stop at a spice and herbal garden to learn about traditional Ayurvedic medicine',
-      'View Kandy city panorama from Upper Lake Viewpoint'
-    ],
-    included: [
-      'Private air-conditioned vehicle with English-speaking chauffeur-guide',
-      'Hotel pick-up and return to Bentota',
-      'All highway tolls, fuel, and parking fees',
-      'Chilled bottled drinking water'
-    ],
-    whatToBring: [
-      'Respectful temple attire (clothing covering shoulders and knees; white preferred)',
-      'Comfortable walking shoes (shoes must be removed inside temple grounds)',
-      'Camera and sun hat',
-      'Cash for temple and garden entrance fees'
-    ],
-    itinerary: [
-      { time: '05:30 AM', activity: 'Hotel pick-up from Bentota and head toward the central hills' },
-      { time: '08:30 AM', activity: 'Visit a traditional Spice & Herbal Garden with herbal tea tasting' },
-      { time: '10:00 AM', activity: 'Explore Peradeniya Royal Botanical Gardens and Orchid House' },
-      { time: '12:30 PM', activity: 'Lunch overlooking the picturesque Mahaweli River or Kandy Lake' },
-      { time: '01:45 PM', activity: 'Guided visit to the sacred Temple of the Tooth Relic' },
-      { time: '03:15 PM', activity: 'Kandy Viewpoint and optional traditional gem / batik showcase' },
-      { time: '04:00 PM', activity: 'Scenic return drive back to Bentota' }
+    tag: 'One Day',
+    overview: 'Kandy is Sri Lanka\'s sacred cultural capital, home to the revered Temple of the Sacred Tooth Relic, the royal palace, and the 150-acre Peradeniya Royal Botanical Gardens.',
+    paragraphs: [
+      'Kandy, the revered hill capital of Sri Lanka and a UNESCO World Heritage Site, was the last stronghold of the independent Sinhalese monarchy, holding out against Portuguese and Dutch colonizers for centuries before finally falling to the British in 1815. Cradled in a lush green valley surrounded by mist-veiled mountain ranges and the winding Mahaweli River, Kandy remains the spiritual and cultural heart of the island.',
+      'At the center of Kandy\'s spiritual life stands the magnificent Temple of the Sacred Tooth Relic (Sri Dalada Maligawa), located within the royal palace complex alongside the tranquil Kandy Lake. The temple houses the left canine tooth of Gautama Buddha, Sri Lanka\'s most venerated religious relic, which has symbolized divine royal sovereignty for millennia. Visitors can experience the atmospheric daily \'Thevava\' puja ceremonies filled with rhythmic traditional drumming, blowing of conch shells, and the scent of fresh lotus and jasmine blossoms.',
+      'Just outside the city center lies the world-renowned Royal Botanic Gardens of Peradeniya, dating back to 1371 as a royal pleasure garden. Spanning nearly 150 acres bounded by the Mahaweli River, it houses over 4,000 documented plant species, an internationally acclaimed orchid house, giant century-old Javan fig trees whose roots sprawl like sculptures, and grand avenues of royal palms.',
+      'The scenic route between the coast and Kandy winds through rubber plantations, pineapples farms, and aromatic spice gardens where cinnamon, cardamom, nutmeg, and vanilla are grown. In Kandy town, travelers can explore traditional artisan centers specializing in intricate silver and brass metalwork, handwoven batiks, and precious Ceylon blue sapphires.'
     ]
   },
   {
@@ -314,39 +151,14 @@ export const excursions = [
     slug: 'sigiriya',
     title: 'Sigiriya',
     duration: '',
-    fullDuration: 'Full Day (approx. 12 - 13 Hours)',
-    departure: '05:00 AM from Bentota',
-    price: '',
     image: sigiriyaImg,
-    tag: '8th Wonder of the World',
-    overview: 'Ascend King Kashyapa\'s dramatic 5th-century "Lion Rock" fortress rising 200 meters above the central jungle plains. Marvel at ancient wall frescoes, the mirrored wall, and the colossal lion paws leading to the palace summit ruins with 360-degree panoramic vistas, paired with a visit to the nearby Dambulla Golden Rock Cave Temple.',
-    highlights: [
-      'Climb the UNESCO World Heritage Sigiriya Rock Citadel (Lion Rock)',
-      'Admire the 1,500-year-old painted frescoes and ancient mirror wall graffiti',
-      'Walk through the world\'s oldest symmetrically landscaped royal water gardens',
-      'Visit Dambulla Cave Temple complex with over 150 golden Buddha statues',
-      'Breathtaking 360-degree panoramic jungle vistas from the fortress summit'
-    ],
-    included: [
-      'Private air-conditioned car or van with expert English-speaking driver',
-      'Direct hotel pick-up and drop-off in Bentota',
-      'All toll fees, fuel charges, and parking fees',
-      'Chilled bottled water provided throughout the day'
-    ],
-    whatToBring: [
-      'Sturdy walking shoes or sneakers with good grip for climbing steps',
-      'Lightweight, breathable clothing and sun hat',
-      'Temple-appropriate attire covering knees and shoulders for Dambulla',
-      'Plenty of sunscreen and camera with extra battery'
-    ],
-    itinerary: [
-      { time: '05:00 AM', activity: 'Early morning pick-up from Bentota hotel' },
-      { time: '09:00 AM', activity: 'Arrive at Sigiriya and begin ascent before midday heat' },
-      { time: '11:30 AM', activity: 'Descend through the boulder and water gardens' },
-      { time: '12:30 PM', activity: 'Authentic Sri Lankan buffet lunch at an open-air village restaurant' },
-      { time: '02:00 PM', activity: 'Visit the ancient Dambulla Golden Rock Cave Temple complex' },
-      { time: '03:30 PM', activity: 'Relaxing return drive through central Sri Lanka' },
-      { time: '07:30 PM', activity: 'Safe arrival back at your Bentota hotel' }
+    tag: 'One Day',
+    overview: 'Sigiriya Lion Rock is an ancient 5th-century sky fortress rising 200 meters above the jungle, featuring world-famous frescoes, mirror walls, and the ruins of King Kashyapa\'s palace.',
+    paragraphs: [
+      'Sigiriya, famously hailed as the 8th Wonder of the World and a UNESCO World Heritage Site, is an awe-inspiring archaeological masterpiece rising dramatically 200 meters above the central jungle plains. In the 5th century AD, King Kashyapa transformed this colossal sheer granite monolith into an impregnable royal fortress and pleasure palace, blending natural geography with extraordinary urban planning and artistic brilliance.',
+      'At the base of the rock lies one of the oldest surviving landscaped gardens in Asia. Symmetrically planned royal water gardens feature intricate hydraulic systems of underground conduits, fountains that still spray water during rainy seasons, geometric moats, and natural boulder gardens. Walking through these ruins reveals the visionary engineering of ancient Sri Lankan civilization.',
+      'Ascending the sheer western rock face via spiral staircases leads to the sheltered rock gallery, home to the world-famous Sigiriya Frescoes—exquisite 1,500-year-old painted portraits of celestial maidens or apsaras adorned with golden jewelry and lotus flowers. Just beyond lies the \'Mirror Wall\', polished so brilliantly in antiquity that the king could see his reflection, and inscribed with poetic graffiti written by visitors between the 6th and 14th centuries.',
+      'Higher up at the northern terrace, visitors pass through the colossal carved stone paws of the Lion Gate—the remnants of a gigantic seated lion whose open jaws once formed the entrance to the summit stairway. The 1.6-hectare summit rewards climbers with the terraced stone foundations of the royal palace, bathing pools, and breathtaking 360-degree vistas stretching across endless emerald canopies, lakes, and distant mountain peaks.'
     ]
   },
   {
@@ -355,41 +167,14 @@ export const excursions = [
     slug: 'nuwara-eliya',
     title: 'Nuwara Eliya',
     duration: '',
-    fullDuration: 'Full Day (approx. 11 - 13 Hours)',
-    departure: '05:00 AM from Bentota',
-    price: '',
     image: nuwaraEliyaImg,
-    tag: 'Little England & Tea Country',
-    overview: 'Ascend into Sri Lanka\'s "Little England", renowned for its crisp cool climate, emerald rolling tea valleys, colonial-era architecture, and roaring waterfalls. Tour an authentic working tea plantation and factory, sample pure Ceylon tea, stroll through Victoria Park, and admire colonial landmarks around Gregory Lake.',
-    highlights: [
-      'Tour a historic working Ceylon Tea plantation & factory with tea tasting',
-      'Marvel at cascading waterfalls including St. Clair\'s and Devon Falls',
-      'Admire British colonial architecture including the 1894 Post Office',
-      'Scenic walk along picturesque Gregory Lake and Queen Victoria Park',
-      'Breathtaking mountain passes through misty highland valleys'
-    ],
-    included: [
-      'Private air-conditioned vehicle with dedicated driver-guide',
-      'Pick-up and drop-off at your hotel in Bentota',
-      'Guided tour of a colonial-era tea factory with tea tasting',
-      'Expressway tolls, fuel, and parking fees',
-      'Chilled bottled mineral water'
-    ],
-    whatToBring: [
-      'Warm sweater, fleece, or light jacket (temperature drops to 12-18°C)',
-      'Comfortable walking shoes',
-      'Camera with zoom lens for waterfall landscapes',
-      'Cash for personal lunch, boat rides, and fresh Ceylon tea purchases'
-    ],
-    itinerary: [
-      { time: '05:00 AM', activity: 'Early morning pick-up from your Bentota accommodation' },
-      { time: '08:30 AM', activity: 'Scenic mountain climb past roaring waterfalls with photo stops' },
-      { time: '10:00 AM', activity: 'Visit a premier Tea Estate & Factory for guided tea processing tour' },
-      { time: '11:45 AM', activity: 'Explore Nuwara Eliya town, colonial post office, and golf club' },
-      { time: '01:00 PM', activity: 'Lunch at a colonial British style restaurant or lakeside cafe' },
-      { time: '02:15 PM', activity: 'Relaxing walk around Lake Gregory and Victoria Park' },
-      { time: '03:30 PM', activity: 'Scenic return journey down the mountain passes' },
-      { time: '07:30 PM', activity: 'Return to your Bentota hotel' }
+    tag: 'One Day',
+    overview: 'Nuwara Eliya is Sri Lanka\'s \'Little England\', celebrated for its cool highland climate, endless rolling tea valleys, colonial British architecture, and roaring waterfalls.',
+    paragraphs: [
+      'Perched at an elevation of 1,868 meters in the central highlands, Nuwara Eliya is affectionately known as \'Little England\' for its cool temperate climate, rolling hills cloaked in manicured tea bushes, and charming British colonial architecture. Founded in the 19th century by British explorer Sir Samuel Baker, it became a favored mountain retreat for colonial tea planters escaping the tropical heat of the lowlands.',
+      'The journey to Nuwara Eliya is a spectacular visual feast, climbing through winding mountain passes adorned with thundering waterfalls such as Ramboda Falls and Devon Falls. The mountain slopes are carpeted in endless geometric terraces of bright emerald green Ceylon tea bushes, dotted with the colorful saris of tea pluckers expertly harvesting the tender \'two leaves and a bud\'.',
+      'Visiting an authentic working colonial-era tea plantation and factory provides an unforgettable look into how world-renowned Ceylon Tea is processed—from withering and rolling to fermentation, drying, and grading. Visitors can experience a guided tea-tasting session to savor the subtle aromas and golden liquor of single-estate high-grown black, green, and silver tip teas.',
+      'In the heart of Nuwara Eliya town, colonial nostalgia endures in landmarks like the red-brick Tudor-style 1894 Post Office, the colonial Grand Hotel, the 1889 Nuwara Eliya Golf Club, and landscaped Queen Victoria Park. Travelers can stroll around picturesque Gregory Lake, take a scenic pony ride, or rent a pedal boat beneath cool misty mountain breezes.'
     ]
   },
   {
@@ -398,41 +183,14 @@ export const excursions = [
     slug: 'colombo-city-tour',
     title: 'Colombo City Tour',
     duration: '',
-    fullDuration: 'Full Day (approx. 7 - 8 Hours)',
-    departure: '08:00 AM from Bentota',
-    price: '',
     image: colomboImg,
-    tag: 'Metropolitan Heritage',
-    overview: 'Explore Sri Lanka\'s energetic commercial metropolis where historic colonial charm meets modern cosmopolitan style. Discover the bustling street bazaars of Pettah, the serene Gangaramaya Buddhist Temple on Beira Lake, the colonial Old Parliament, Galle Face Green oceanfront promenade, and Independence Memorial Hall.',
-    highlights: [
-      'Visit the iconic Gangaramaya Buddhist Temple and floating Seema Malaka',
-      'Explore Independence Memorial Hall and colonial Cinnamon Gardens mansions',
-      'Experience the bustling sights, spices, and sounds of the Pettah bazaar',
-      'Stroll along the historic Galle Face Green oceanfront promenade',
-      'Visit the Colombo Fort Clock Tower and Old Parliament heritage buildings'
-    ],
-    included: [
-      'Private air-conditioned car or van transfer directly to Colombo and back',
-      'Hotel pick-up and drop-off from Bentota',
-      'Guided city tour with flexible photo stops',
-      'Highway tolls, fuel, and parking fees',
-      'Chilled bottled water'
-    ],
-    whatToBring: [
-      'Comfortable walking shoes or sandals',
-      'Modest attire covering shoulders and knees for temple entry',
-      'Camera and sunglasses',
-      'Spending money for shopping at Odel, Barefoot, or local artisan markets'
-    ],
-    itinerary: [
-      { time: '08:00 AM', activity: 'Pick-up from your hotel and travel via the Southern Expressway' },
-      { time: '09:30 AM', activity: 'Arrive in Colombo; visit Gangaramaya Temple and Seema Malaka' },
-      { time: '11:00 AM', activity: 'Drive past Colombo Fort, Old Parliament, and Dutch Hospital' },
-      { time: '12:00 PM', activity: 'Explore Independence Square and BMICH colonial avenues' },
-      { time: '01:00 PM', activity: 'Lunch at a renowned Colombo restaurant (crab / authentic Sri Lankan)' },
-      { time: '02:30 PM', activity: 'Shopping stop at boutique handicraft centers (Odel / Barefoot)' },
-      { time: '04:00 PM', activity: 'Galle Face Green ocean walk before highway return' },
-      { time: '05:30 PM', activity: 'Drop-off back at your hotel in Bentota' }
+    tag: 'One Day',
+    overview: 'Colombo is Sri Lanka\'s cosmopolitan commercial capital, combining vibrant street markets, colonial Dutch architecture, tranquil Buddhist temples, and scenic ocean promenades.',
+    paragraphs: [
+      'Colombo is Sri Lanka\'s vibrant commercial capital and largest city, where centuries of maritime history meet modern South Asian cosmopolitan energy. Situated on the western coast along historic sea routes, Colombo has welcomed Arab, Chinese, Portuguese, Dutch, and British traders for over two thousand years, leaving behind a rich tapestry of cultures, architecture, and culinary traditions.',
+      'The city offers striking contrasts between old and new. In the bustling commercial hub of Pettah, colorful open-air street bazaars overflow with exotic spices, textiles, jewelry, electronics, and fresh tropical fruit. Just moments away stand grand colonial monuments like the Old Dutch Hospital—now a premier dining and lifestyle precinct—the historic Colombo Fort Clock Tower, and the neoclassical Old Parliament Building facing the Indian Ocean.',
+      'A visit to the renowned Gangaramaya Temple on the edge of Beira Lake reveals an extraordinary sanctuary of Buddhist art, antique collections, and spiritual tranquility. Just across the water sits the serene floating Seema Malaka pavilion, redesigned by Sri Lanka\'s legendary architect Geoffrey Bawa, offering peaceful reflection amidst the city skyline.',
+      'In the leafy, affluent district of Cinnamon Gardens, wide avenues are lined with majestic rain trees, colonial mansions, the National Museum, and the majestic Independence Memorial Hall commemorating freedom from British rule in 1948. The city tour finishes along the expansive Galle Face Green promenade, where locals and visitors gather to fly kites, taste crispy street-food \'isso wade\' (prawn fritters), and watch the sun dip below the horizon.'
     ]
   },
   {
@@ -441,41 +199,14 @@ export const excursions = [
     slug: 'ella',
     title: 'Ella',
     duration: '',
-    fullDuration: 'Full Day (approx. 11 - 13 Hours)',
-    departure: '04:30 AM from Bentota',
-    price: '',
     image: ellaImg,
-    tag: 'Scenic Mountain Wonderland',
-    overview: 'Journey to the picturesque mountain village of Ella, famed for breathtaking mountain gaps, emerald tea gardens, and architectural wonders. Walk across the iconic Nine Arch Demodara Bridge nestled in jungle ravines, hike up Little Adam\'s Peak for sweeping valley views, and marvel at the cascading Ravana Falls.',
-    highlights: [
-      'Walk across the world-famous colonial Nine Arch Bridge in Demodara',
-      'Hike Little Adam\'s Peak for panoramic 360-degree mountain gap views',
-      'Admire the roaring Ravana Waterfall cascading down rugged rock cliffs',
-      'Witness trains crossing the viaduct surrounded by lush tea hills',
-      'Experience the relaxed bohemian atmosphere and cafes of Ella mountain town'
-    ],
-    included: [
-      'Private air-conditioned transport with skilled mountain driver',
-      'Hotel pick-up and return from Bentota area',
-      'Assistance finding the best viewpoints for bridge and train crossings',
-      'Expressway tolls, fuel, and parking fees',
-      'Chilled bottled drinking water'
-    ],
-    whatToBring: [
-      'Sturdy hiking sneakers or walking shoes',
-      'Camera / smartphone with plenty of storage',
-      'Sun hat, sunscreen, and sunglasses',
-      'Light jacket or rain layer for mountain weather',
-      'Cash for meals, zip-line (optional), and refreshments'
-    ],
-    itinerary: [
-      { time: '04:30 AM', activity: 'Early departure from Bentota via scenic southern expressway' },
-      { time: '08:45 AM', activity: 'Arrive in Ella; scenic photo stop at roaring Ravana Falls' },
-      { time: '09:30 AM', activity: 'Trek to the iconic Nine Arch Bridge; catch train passing over the bridge' },
-      { time: '11:45 AM', activity: 'Hike Little Adam\'s Peak for panoramic views across Ella Gap' },
-      { time: '01:30 PM', activity: 'Relaxing lunch in Ella town at a vibrant mountain cafe' },
-      { time: '03:00 PM', activity: 'Begin scenic drive back down through rolling tea country' },
-      { time: '07:30 PM', activity: 'Safe arrival back at your Bentota hotel' }
+    tag: 'One Day',
+    overview: 'Ella is a picturesque mountain paradise famous for the iconic colonial Nine Arch Bridge, hiking Little Adam\'s Peak, the roaring Ravana Falls, and panoramic gap views.',
+    paragraphs: [
+      'Nestled in the southern highlands at an elevation of 1,041 meters, Ella is one of Sri Lanka\'s most enchanting mountain villages, beloved for its relaxed bohemian charm, panoramic mountain gaps, and dramatic scenery. Surrounded by cloud-kissed peaks, dense pine forests, and sweeping tea estates, Ella provides an inspiring escape into pristine natural beauty.',
+      'Ella\'s most iconic architectural marvel is the Nine Arch Demodara Bridge (also known as the \'Bridge in the Sky\'). Commissioned during British colonial rule in 1921, this majestic 91-meter-long railway viaduct was constructed entirely out of solid granite bricks and cement without a single piece of structural steel. Watching the iconic blue passenger train slowly cross the high stone arches surrounded by dense tropical jungle and tea bushes is a bucket-list spectacle for travelers.',
+      'For hikers, Ella offers rewarding and accessible trails. The hike to Little Adam\'s Peak (Punchi Sri Pada) winds gently through fragrant tea plantations before ascending to a series of panoramic ridgelines that offer breathtaking 360-degree views across the deep Ella Gap to the southern plains far below. Adventurous travelers can also admire the dramatic Ella Rock towering across the valley.',
+      'Ella is steeped in ancient mythology linked to the Indian epic Ramayana. A short drive down the valley brings visitors to the thundering Ravana Falls, cascading 25 meters down rugged rock amphitheaters into natural plunge pools. According to legend, King Ravana hid Princess Sita in the subterranean Ravana Cave behind these very waterfalls.'
     ]
   },
 
@@ -483,191 +214,237 @@ export const excursions = [
   {
     id: 12,
     category: 'two-day',
-    slug: 'kandy-nuwara-eliya-2-day',
-    title: 'Kandy & Nuwara Eliya Highland Discovery',
-    duration: '2 Days / 1 Night',
-    fullDuration: '2 Days / 1 Night',
-    departure: '06:00 AM from Bentota',
-    price: '',
-    image: kandyImg,
-    tag: 'Two-Day Highlands',
-    overview: 'A magnificent two-day journey into the cool central highlands of Sri Lanka. Discover the sacred Temple of the Tooth Relic in royal Kandy, explore world-class botanical gardens, and climb through cascading waterfalls to the colonial charm of Nuwara Eliya\'s tea estates.',
-    highlights: [
-      'Temple of the Tooth Relic and traditional cultural dance show in Kandy',
-      'Royal Botanical Gardens at Peradeniya',
-      'Scenic drive past Ramboda Waterfalls to tea plantations',
-      'Authentic working Ceylon tea factory tour and tea tasting',
-      'Overnight stay in a scenic highland hotel'
-    ],
-    included: [
-      'Private air-conditioned vehicle with dedicated driver-guide for 2 days',
-      'Pick-up and drop-off at your hotel in Bentota',
-      'All fuel, expressway tolls, and driver accommodation',
-      'Bottled drinking water throughout the journey'
-    ],
-    whatToBring: ['Warm clothing for the evening', 'Temple attire', 'Comfortable shoes', 'Camera'],
-    itinerary: [
-      { time: 'Day 1 - 06:00 AM', activity: 'Depart Bentota; visit herbal garden, Peradeniya Gardens & Temple of the Tooth. Overnight in Kandy.' },
-      { time: 'Day 2 - 08:00 AM', activity: 'Scenic drive to Nuwara Eliya via waterfalls, tea factory tour, Gregory Lake, and return to Bentota by evening.' }
+    slug: 'kandy-nuwara-eliya',
+    title: 'Kandy-Nuwara Eliya',
+    duration: '',
+    image: kandy2Img,
+    tag: 'Two Day',
+    overview: 'A magnificent two-day journey through Sri Lanka\'s central highlands, exploring the sacred royal city of Kandy and the misty colonial tea valleys of Nuwara Eliya.',
+    locations: [
+      {
+        name: 'Kandy',
+        image: kandy2Img,
+        paragraphs: [
+          'Kandy is the revered spiritual and cultural capital of Sri Lanka, nestled in a lush valley encircled by mist-veiled mountain ranges and the winding Mahaweli River. As the final stronghold of the Sinhalese monarchy, Kandy preserves an extraordinarily rich legacy of royal traditions, architecture, and religious veneration.',
+          'The sacred heart of the city is the Temple of the Tooth Relic (Sri Dalada Maligawa), located inside the historic royal palace complex along the tranquil waters of Kandy Lake. The temple houses the sacred tooth of the Buddha, revered by pilgrims worldwide. Surrounding the city lies the magnificent Peradeniya Royal Botanical Gardens, home to over 4,000 plant species, sprawling centuries-old fig trees, and royal palm avenues.'
+        ]
+      },
+      {
+        name: 'Nuwara Eliya',
+        image: nuwaraEliya2Img,
+        paragraphs: [
+          'Rising to an elevation of nearly 1,900 meters, Nuwara Eliya is known as \'Little England\' for its cool mountain climate, rolling emerald tea estates, and colonial British charm. The road ascends past thundering waterfalls such as Ramboda and Devon Falls before opening into valleys carpeted in tea bushes.',
+          'Visitors can explore working colonial tea estates and factories to witness the traditional processing of world-famous Ceylon Tea, sample single-estate brews, and wander past historic landmarks like the 1894 Post Office, Gregory Lake, and Queen Victoria Park.'
+        ]
+      }
     ]
   },
   {
     id: 13,
     category: 'two-day',
-    slug: 'yala-udawalawe-safari-2-day',
-    title: 'Yala & Udawalawe Wildlife Adventure',
-    duration: '2 Days / 1 Night',
-    fullDuration: '2 Days / 1 Night',
-    departure: '06:00 AM from Bentota',
-    price: '',
-    image: yalaImg,
-    tag: 'Two-Day Wildlife',
-    overview: 'The ultimate Sri Lankan wildlife expedition combining the world-famous leopard territory of Yala with the massive elephant herds of Udawalawe. Stay overnight near the wilderness and enjoy multiple game drives for maximum wildlife sightings.',
-    highlights: [
-      'Evening and morning 4x4 safaris in Yala National Park',
-      'Elephant Transit Home feeding session and Udawalawe safari',
-      'High probability of spotting leopards, sloth bears, and wild elephants',
-      'Overnight stay near the jungle sanctuary'
-    ],
-    included: [
-      'Private air-conditioned vehicle with driver-guide for both days',
-      'Hotel transfers from Bentota',
-      'All vehicle fuel, toll charges, and driver expenses',
-      'Chilled mineral water'
-    ],
-    whatToBring: ['Safari clothing (neutral colors)', 'Binoculars and camera', 'Sunscreen and hat'],
-    itinerary: [
-      { time: 'Day 1 - 06:00 AM', activity: 'Depart Bentota toward Yala. Afternoon 4x4 leopard safari in Yala. Overnight near park.' },
-      { time: 'Day 2 - 07:00 AM', activity: 'Morning safari / visit Udawalawe Elephant Transit Home & park. Return to Bentota by evening.' }
+    slug: 'sigiriya-dambulla',
+    title: 'Sigiriya-Dambulla',
+    duration: '',
+    image: sigiriya2Img,
+    tag: 'Two Day',
+    overview: 'Immerse yourself in the golden age of Sri Lankan civilization, scaling the dramatic 5th-century Sigiriya Sky Citadel and walking through the sacred Dambulla Golden Rock Cave Temples.',
+    locations: [
+      {
+        name: 'Sigiriya',
+        image: sigiriya2Img,
+        paragraphs: [
+          'Sigiriya, hailed as the 8th Wonder of the World and a UNESCO World Heritage Site, is a colossal 200-meter sheer granite monolith that was transformed into a fortified royal palace citadel in the 5th century by King Kashyapa.',
+          'At the base lie Asia\'s oldest landscaped water gardens with subterranean hydraulics. Halfway up the rock face, sheltered galleries display the legendary 1,500-year-old celestial Sigiriya frescoes, while the summit preserves palace foundations, royal bathing pools, and breathtaking 360-degree vistas across jungle plains.'
+        ]
+      },
+      {
+        name: 'Dambulla',
+        image: dambulla2Img,
+        paragraphs: [
+          'The Dambulla Rock Cave Temple complex (Golden Temple of Dambulla) is the largest and best-preserved cave sanctuary in Sri Lanka. Dating back to the 1st century BC, King Valagamba sought refuge in these massive granite caves before transforming them into sacred Buddhist shrines.',
+          'Across five grand cavernous sanctuaries, visitors discover over 150 exquisitely crafted golden Buddha statues, intricate royal figures, and more than 2,000 square meters of vibrant religious murals painted across the natural cave ceilings.'
+        ]
+      }
     ]
   },
   {
     id: 14,
     category: 'two-day',
-    slug: 'sigiriya-polonnaruwa-cultural-2-day',
-    title: 'Sigiriya & Cultural Triangle Discovery',
-    duration: '2 Days / 1 Night',
-    fullDuration: '2 Days / 1 Night',
-    departure: '05:30 AM from Bentota',
-    price: '',
-    image: sigiriyaImg,
-    tag: 'Two-Day Ancient Kingdoms',
-    overview: 'Immerse yourself in thousands of years of Sri Lankan royalty and architectural marvels. Climb the towering Sigiriya Rock Citadel, explore ancient cave temples at Dambulla, and walk through the royal ruins of Polonnaruwa.',
-    highlights: [
-      'Climb the 5th-century Sigiriya Rock Fortress at sunrise or late afternoon',
-      'Dambulla Golden Cave Temples with ancient frescoes & statues',
-      'Ancient Kingdom ruins of Polonnaruwa',
-      'Overnight stay in the heart of the Cultural Triangle'
-    ],
-    included: [
-      'Private air-conditioned transportation for 2 days',
-      'Door-to-door hotel pick-up and drop-off in Bentota',
-      'All toll fees, fuel, and driver expenses',
-      'Bottled drinking water'
-    ],
-    whatToBring: ['Temple-appropriate clothing', 'Walking shoes with good grip', 'Sun protection'],
-    itinerary: [
-      { time: 'Day 1 - 05:30 AM', activity: 'Depart Bentota; explore Dambulla Cave Temple and climb Sigiriya. Overnight in Sigiriya.' },
-      { time: 'Day 2 - 08:30 AM', activity: 'Explore Polonnaruwa ancient kingdom ruins or Minneriya elephant safari. Return to Bentota.' }
+    slug: 'sigiriya-dambulla-kandy',
+    title: 'Sigiriya-Dambulla-Kandy',
+    duration: '',
+    image: sigiriya2Img,
+    tag: 'Two Day',
+    overview: 'The definitive Cultural Triangle expedition combining three UNESCO World Heritage masterpieces: the ancient fortress of Sigiriya, the golden cave temples of Dambulla, and the sacred royal capital of Kandy.',
+    locations: [
+      {
+        name: 'Sigiriya',
+        image: sigiriya2Img,
+        paragraphs: [
+          'Sigiriya is an extraordinary archaeological marvel where ancient engineering, art, and nature fuse into one. Rising 200 meters into the sky, climbers ascend through the colossal stone lion paws to stand atop the palace ruins of King Kashyapa overlooking panoramic jungle canopies.',
+          'The climb features the world-renowned frescoes of celestial maidens, the ancient Mirror Wall with centuries-old traveler poetry, and landscaped water gardens that still function with remarkable hydraulic ingenuity.'
+        ]
+      },
+      {
+        name: 'Dambulla',
+        image: dambulla2Img,
+        paragraphs: [
+          'Dambulla Cave Temple sits majestically atop a massive granite ridge with sweeping views of the surrounding countryside, including Sigiriya in the distance. Its five sacred caverns have served as an active place of pilgrimage and worship for over twenty-two centuries.',
+          'Inside, the cool cave chambers house awe-inspiring 14-meter reclining Buddha statues carved directly from living rock, surrounded by intricate ceiling frescoes depicting the life of the Buddha and historic moments in Sri Lankan history.'
+        ]
+      },
+      {
+        name: 'Kandy',
+        image: kandy2Img,
+        paragraphs: [
+          'Continuing south into the hills brings you to Kandy, the final royal capital of the island. Surrounded by the forested peaks of the Hanthana mountains, Kandy is famed for the Temple of the Sacred Tooth Relic and its atmospheric lakeside promenades.',
+          'The city is also a sanctuary of rich craftsmanship, showcasing centuries of traditional gem cutting, hand-beaten copper work, and traditional Kandyan dance performances with fire-walking rituals.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 15,
+    category: 'two-day',
+    slug: 'yala-galle',
+    title: 'Yala-Galle',
+    duration: '',
+    image: yala2Img,
+    tag: 'Two Day',
+    overview: 'An unforgettable two-day journey contrasting the raw wilderness and leopard tracking of Yala National Park with the romantic colonial charm and ocean ramparts of Galle Dutch Fort.',
+    locations: [
+      {
+        name: 'Yala',
+        image: yala2Img,
+        paragraphs: [
+          'Yala National Park is Sri Lanka\'s premier big-game safari sanctuary, globally famous for holding one of the highest leopard densities in the world. An open-top 4x4 safari jeep takes you deep into the park\'s diverse landscapes of monsoon scrub, coastal lagoons, and granite outcrops.',
+          'Beyond leopards, travelers regularly spot herds of wild Asian elephants, sloth bears foraging among termitaries, crocodiles basking in wetlands, and vibrant flocks of waterbirds gathered along the Indian Ocean shores.'
+        ]
+      },
+      {
+        name: 'Galle',
+        image: galle2Img,
+        paragraphs: [
+          'Galle Dutch Fort is a 17th-century UNESCO World Heritage living citadel standing proudly on a southern ocean promontory. Walking its massive stone ramparts and bastions reveals panoramic ocean views and the iconic 1939 white lighthouse.',
+          'Within the fort, cobblestone lanes are lined with Dutch colonial architecture, boutique cafes, artisan jewelers, and spice merchants, making it a peaceful and romantic coastal haven.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 16,
+    category: 'two-day',
+    slug: 'udawalawa-galle',
+    title: 'Udawalawa-Galle',
+    duration: '',
+    image: udawalawa2Img,
+    tag: 'Two Day',
+    overview: 'Experience the best of southern Sri Lanka, combining the guaranteed wild elephant encounters of Udawalawe National Park with the colonial maritime history and ocean ramparts of Galle Dutch Fort.',
+    locations: [
+      {
+        name: 'Udawalawa',
+        image: udawalawa2Img,
+        paragraphs: [
+          'Udawalawe National Park is celebrated worldwide as the best destination in Sri Lanka for observing wild Asian elephants in their natural habitat. Over 500 wild elephants roam the open grasslands, reservoirs, and scrub forests of the park.',
+          'The safari provides open vistas where herds of elephants and playful calves graze and bathe in watering holes, complemented by a visit to the nearby Elephant Transit Home during the baby elephant feeding session.'
+        ]
+      },
+      {
+        name: 'Galle',
+        image: galle2Img,
+        paragraphs: [
+          'Galle Fort is an extraordinary living monument founded by the Portuguese in 1505 and fortified by the Dutch. Massive ocean-facing bastions enclose a charming historic town filled with colonial villas, the Dutch Reformed Church, and the historic maritime museum.',
+          'Strolling along the cobblestone pathways, browsing artisan craft galleries, and watching golden Indian Ocean sunsets from the western ramparts creates an unforgettable coastal conclusion.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 17,
+    category: 'two-day',
+    slug: 'ella-nuwara-eliya-train',
+    title: 'Ella-Nuwara Eliya(include Train Journey)',
+    duration: '',
+    image: ella2Img,
+    tag: 'Two Day',
+    overview: 'The quintessential Sri Lankan hill country experience featuring the iconic Nine Arch Bridge, Little Adam\'s Peak, the scenic mountain train journey, and the colonial tea country of Nuwara Eliya.',
+    locations: [
+      {
+        name: 'Ella',
+        image: ella2Img,
+        paragraphs: [
+          'Ella is a breathtaking mountain village nestled amidst green peaks and tea plantations. It is home to the world-famous Demodara Nine Arch Bridge, an engineering marvel built entirely of stone and brick without steel, surrounded by emerald jungle.',
+          'Hikers can scale Little Adam\'s Peak for sweeping 360-degree vistas across Ella Gap and marvel at the roaring cascades of Ravana Falls tumbling down rock faces steeped in ancient Ramayana mythology.'
+        ]
+      },
+      {
+        name: 'Nuwara Eliya',
+        image: nuwaraEliya2Img,
+        paragraphs: [
+          'Travel between Ella and Nuwara Eliya via the world-famous scenic mountain railway, winding through misty cloud forests, deep ravines, and endless rolling tea plantations in what is widely celebrated as one of the most beautiful train rides in the world.',
+          'In Nuwara Eliya, experience \'Little England\' with visits to working colonial Ceylon tea estates, tasting fresh high-grown tea, strolling around Lake Gregory, and enjoying the crisp mountain air.'
+        ]
+      }
+    ]
+  },
+  {
+    id: 18,
+    category: 'two-day',
+    slug: 'udawalawa-yala',
+    title: 'Udawalawa-Yala',
+    duration: '',
+    image: udawalawa2Img,
+    tag: 'Two Day',
+    overview: 'The ultimate dual-park wildlife safari expedition, pairing the guaranteed wild elephant herds of Udawalawe with the world-renowned leopard and sloth bear territory of Yala.',
+    locations: [
+      {
+        name: 'Udawalawa',
+        image: udawalawa2Img,
+        paragraphs: [
+          'Udawalawe National Park provides unmatched open-savannah game drives where wild elephant families, spotted deer, wild boars, and water buffaloes roam free around the immense Udawalawe reservoir.',
+          'The open landscape allows clear close-up observations of elephant herd dynamics and playful baby calves, alongside the rehabilitation work of the nearby Elephant Transit Home.'
+        ]
+      },
+      {
+        name: 'Yala',
+        image: yala2Img,
+        paragraphs: [
+          'Yala National Park takes wildlife tracking to the next level with its rugged coastal scrublands, freshwater lagoons, and towering granite boulders that serve as home to the elusive Sri Lankan Leopard.',
+          'Safari jeeps navigate diverse tracks tracking leopards, shaggy sloth bears, jackals, crocodiles, and vast flocks of migratory waterbirds, making this dual-park journey the complete Sri Lankan safari.'
+        ]
+      }
     ]
   },
 
   // ── Special Trips ──────────────────────────────────────────────
   {
-    id: 15,
+    id: 19,
     category: 'special',
-    slug: 'bentota-river-mangrove-safari',
-    title: 'Bentota River & Mangrove Lagoon Safari',
-    duration: 'Special Tour',
-    fullDuration: 'Half Day (approx. 3 - 4 Hours)',
-    departure: 'Flexible morning or afternoon from Bentota',
-    price: '',
-    image: udawalawaImg,
-    tag: 'Special Local Safari',
-    overview: 'Experience the signature local excursion of Bentota along the tranquil waters of the Bentota River and Madu Ganga mangrove lagoons. Glide through natural mangrove tunnels, visit cinnamon peelers on secluded islands, experience natural fish therapy, and visit baby turtles at a conservation hatchery.',
-    highlights: [
-      'Motorboat safari through natural arched mangrove tunnels',
-      'Spot water monitors, river birds, bats, and baby crocodiles',
-      'Visit Cinnamon Island to witness traditional cinnamon preparation',
-      'Relax with natural open-water fish massage therapy',
-      'Visit a local Sea Turtle Conservation Hatchery'
-    ],
-    included: [
-      'Private boat safari with experienced captain',
-      'Hotel pick-up and drop-off in Bentota area',
-      'Life jackets and safety gear',
-      'Chilled king coconut water or bottled water'
-    ],
-    whatToBring: ['Light casual beach clothing', 'Camera or smartphone', 'Sunglasses and sunscreen'],
-    itinerary: [
-      { time: '09:00 AM', activity: 'Hotel pick-up and transfer to the river pier' },
-      { time: '09:15 AM', activity: 'Board private boat and cruise through mangrove canopies' },
-      { time: '10:30 AM', activity: 'Visit Cinnamon Island and enjoy natural fish spa' },
-      { time: '11:45 AM', activity: 'Visit Sea Turtle Hatchery; return to hotel' }
+    slug: 'bentota-boat-safari',
+    title: 'Bentota Boat safari',
+    duration: '',
+    image: bentotaBoatImg,
+    overview: 'Experience the tranquil beauty of the Bentota River and its intricate mangrove waterways on an exclusive private boat safari, discovering vibrant riverine wildlife, secret islands, and peaceful natural channels.',
+    paragraphs: [
+      'The Bentota River Boat Safari is one of the most beloved and enchanting nature excursions on Sri Lanka\'s southwestern coast. Boarding a comfortable private motorboat, you set out along the tranquil, glass-like waters of the Bentota Ganga, where the river winds peacefully through lush tropical foliage, bamboo groves, and intricate mangrove estuaries.',
+      'As your boat glides deep into the shaded river bends, you will navigate through natural mangrove tunnels where massive aerial root networks drape into the water, creating a cool green canopy sheltered from the tropical sun. Keep your eyes peeled for riverine wildlife in their natural habitat, including large water monitor lizards sunbathing on low branches, colorful river kingfishers (pied, common, and white-throated) darting across the water, and colonies of fruit bats roosting high in riverside trees.',
+      'The river journey also takes you past idyllic secluded river islands. You can stop at a traditional cinnamon island to observe how skilled local artisans harvest and peel authentic Ceylon cinnamon bark using age-old hand tools, and enjoy the refreshing herbal aroma of freshly prepared cinnamon quills. You can also experience natural riverside fish therapy, dipping your feet into clear netted enclosures where tiny doctor fish provide a soothing, ticklish massage.',
+      'Whether you choose an early morning tour to catch the morning mist rising off the river and peak bird activity, or a peaceful late afternoon cruise as the sun dips below the coconut palms, the Bentota Boat Safari offers an unforgettable, family-friendly encounter with coastal Sri Lanka\'s natural charm.'
     ]
   },
   {
-    id: 16,
+    id: 20,
     category: 'special',
-    slug: 'deep-sea-fishing-sunset-cruise',
-    title: 'Deep Sea Game Fishing & Sunset Cruise',
-    duration: 'Special Tour',
-    fullDuration: 'Half Day (approx. 4 - 5 Hours)',
-    departure: '06:00 AM (Morning Game Fishing) or 03:30 PM (Sunset Cruise)',
-    price: '',
-    image: mirissaImg,
-    tag: 'Exclusive Ocean Charter',
-    overview: 'Head out into the deep azure waters of the Indian Ocean off the coast of Bentota on a private boat charter. Try your hand at catching marlin, sailfish, yellowfin tuna, barracuda, and wahoo with top-quality fishing gear and guidance from seasoned local fishermen.',
-    highlights: [
-      'Private boat charter into the Indian Ocean game fishing grounds',
-      'Target yellowfin tuna, sailfish, wahoo, barracuda, and king mackerel',
-      'Modern rods, reels, lures, and live bait included',
-      'Breathtaking open-ocean views and spectacular tropical sunset'
-    ],
-    included: [
-      'Private boat charter with licensed captain and crew',
-      'All high-grade trolling and jigging fishing gear',
-      'Life jackets and marine safety equipment',
-      'Refreshments, soft drinks, and bottled water'
-    ],
-    whatToBring: ['Polarized sunglasses and sun protection', 'Motion sickness tablets if needed', 'Comfortable deck shoes or sandals'],
-    itinerary: [
-      { time: '06:00 AM / 03:30 PM', activity: 'Meet at Bentota marina / beach launch point' },
-      { time: '06:30 AM / 04:00 PM', activity: 'Cruise past coastal reef into deep drop-offs and begin trolling' },
-      { time: '09:30 AM / 06:00 PM', activity: 'Exciting fishing action, photo opportunities, and sunset views' },
-      { time: '10:30 AM / 06:45 PM', activity: 'Return to shore and transfer back to hotel' }
-    ]
-  },
-  {
-    id: 17,
-    category: 'special',
-    slug: 'sinharaja-birdwatching-rainforest-special',
-    title: 'Sinharaja Naturalist Birdwatching Expedition',
-    duration: 'Special Tour',
-    fullDuration: 'Special Full Day',
-    departure: '05:30 AM from Bentota',
-    price: '',
-    image: sinharajaImg,
-    tag: 'Specialist Eco Tour',
-    overview: 'A specialized eco-expedition designed for birdwatchers, photographers, and nature enthusiasts. Led by an expert ornithologist, venture into deep microhabitats to track mixed-species bird feeding flocks and spot rare endemics like the Serendib Scops Owl, Sri Lanka Spurfowl, and Red-faced Malkoha.',
-    highlights: [
-      'Dedicated expedition led by an expert ornithologist and naturalist tracker',
-      'High success rate of spotting Sri Lanka\'s rare endemic bird species',
-      'Early morning entrance for peak bird activity and flock sightings',
-      'Pristine nature photography opportunities in ancient rainforest'
-    ],
-    included: [
-      'Private roundtrip transport from Bentota in AC vehicle',
-      'Specialist naturalist bird guide with spotting scope',
-      'Leech socks, entry permits, and rainforest access',
-      'Packed breakfast, hot tea, and bottled water'
-    ],
-    whatToBring: ['Binoculars and DSLR camera with telephoto lens', 'Muted jungle colors clothing', 'Waterproof pack'],
-    itinerary: [
-      { time: '05:30 AM', activity: 'Early departure for morning bird activity' },
-      { time: '07:30 AM', activity: 'Enter reserve; begin slow naturalist tracking through canopy corridors' },
-      { time: '12:00 PM', activity: 'Jungle stream rest stop and picnic lunch' },
-      { time: '02:30 PM', activity: 'Afternoon trail and return to Bentota by evening' }
+    slug: 'bird-watching',
+    title: 'Bird watching',
+    duration: '',
+    image: birdWatchingImg,
+    overview: 'Embark on a specialized birdwatching expedition guided by seasoned naturalists, exploring diverse habitats to observe an astonishing variety of endemic, resident, and migratory bird species.',
+    paragraphs: [
+      'Sri Lanka is globally celebrated as one of the world\'s most remarkable birdwatching havens. Due to its unique geographic position at the southern tip of the Central Asian Flyway and its diverse microclimates—spanning coastal lagoons, wetlands, riverine forests, and lush tropical canopies—the island provides sanctuary to over 450 recorded avian species, including more than 30 precious endemics found nowhere else on earth.',
+      'Our dedicated Bird Watching excursion is designed for nature lovers, avid ornithologists, and wildlife photographers seeking a quiet, immersive wilderness encounter. Guided by knowledgeable local naturalists equipped with keen eyes and ears for bird calls, you will venture into rich birding corridors during early morning and late afternoon hours when feeding and singing activity is at its height.',
+      'Throughout the excursion, you will have opportunities to observe an extraordinary diversity of species. Watch for dazzling Asian paradise flycatchers flitting between trees, vivid green bee-eaters perched along branches, purple herons and white-breasted waterhens stalking the shallows, hornbills gliding through the canopy, and majestic raptors such as the crested serpent eagle and white-bellied sea eagle circling high above.',
+      'During the migratory season from October to April, the habitats come alive with thousands of winter visitors, including sandpipers, plovers, terns, and ducks escaping the northern hemisphere cold. Whether observing rare forest endemics or spectacular gatherings of wetland waterbirds, this tour guarantees peaceful contemplation and unforgettable photographic moments in pristine nature.'
     ]
   }
 ];

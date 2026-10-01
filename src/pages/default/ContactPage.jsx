@@ -1,10 +1,9 @@
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
-import { MapPin, Phone, Mail, Clock, ArrowRight, Send } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react'
 import { FaWhatsapp, FaFacebookF, FaTripadvisor } from 'react-icons/fa'
 import contactBg from '../../assets/contact/contact.jpg'
-import { href } from 'react-router-dom'
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -45,7 +44,7 @@ const infoCards = [
   },
   {
     Icon: Phone,
-    label: 'Phone',
+    label: 'Phone / WhatsApp',
     value: '+94 77 240 8371',
     href: 'tel:+94772408371',
   },
@@ -289,38 +288,35 @@ export default function ContactPage() {
 
             <div className="rounded-2xl border border-gray-100 p-6">
               <p className="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-4">Follow Along</p>
-              <div className="flex gap-3">
-               
-                  <a
-                    href='https://www.tripadvisor.com/Attraction_Review-g297895-d25310753-Reviews-Bentota_Samantha_Tours_Travels-Bentota_Galle_District_Southern_Province.html'
-                    target='_blank'
-                    className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-forest-dark hover:bg-forest-primary hover:text-white hover:border-forest-primary transition-colors duration-300"
-                  >
-                    <FaTripadvisor className="w-4 h-4" />
-                  </a>
-                  <a
-                    href='https://web.facebook.com/bentotasamantha'
-                    target='_blank'
-                    className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-forest-dark hover:bg-forest-primary hover:text-white hover:border-forest-primary transition-colors duration-300"
-                  >
-                    <FaFacebookF className="w-4 h-4" />
-                  </a>
-                  <a
-                    href='https://wa.me/94772408371'
-                    target='_blank'
-                    className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-forest-dark hover:bg-forest-primary hover:text-white hover:border-forest-primary transition-colors duration-300"
-                  >
-                    <FaWhatsapp className="w-4 h-4" />
-                  </a>
+              <div className="flex items-center gap-4">
+                <a
+                  href='https://www.tripadvisor.com/Attraction_Review-g297895-d25310753-Reviews-Bentota_Samantha_Tours_Travels-Bentota_Galle_District_Southern_Province.html'
+                  target='_blank'
+                  rel="noopener noreferrer"
+                  aria-label="TripAdvisor"
+                  className="w-14 h-14 rounded-full bg-[#00AA6C] hover:bg-[#008f5a] flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-md cursor-pointer"
+                >
+                  <FaTripadvisor className="w-7 h-7 text-white" />
+                </a>
+                <a
+                  href='https://web.facebook.com/bentotasamantha'
+                  target='_blank'
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="w-14 h-14 rounded-full bg-[#1877F2] hover:bg-[#166fe5] flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-md cursor-pointer"
+                >
+                  <FaFacebookF className="w-6 h-6 text-white" />
+                </a>
+                <a
+                  href='https://wa.me/94772408371'
+                  target='_blank'
+                  rel="noopener noreferrer"
+                  aria-label="WhatsApp"
+                  className="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba5a] flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-md cursor-pointer"
+                >
+                  <FaWhatsapp className="w-7 h-7 text-white" />
+                </a>
               </div>
-              <a
-                href="https://maps.app.goo.gl/TttCFWHYJBHJmGxE7"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-forest-primary hover:text-forest-primary-light mt-5 font-medium transition-colors"
-              >
-                Get directions <ArrowRight className="w-3.5 h-3.5" />
-              </a>
             </div>
           </motion.div>
         </div>

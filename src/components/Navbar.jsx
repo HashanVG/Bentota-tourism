@@ -8,7 +8,7 @@ const links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/excursions', label: 'Excursions', isDropdown: true },
-  { to: '/activities', label: 'Activities' },
+  { to: '/round-tour', label: 'Round Tour' },
   { to: '/#reviews', label: 'Reviews', isReview: true },
   { to: '/contact', label: 'Contact', isContactButton: true },
 ]

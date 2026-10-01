@@ -293,13 +293,8 @@ export default function HomePage() {
             <h2 className="font-display text-2xl lg:text-5xl text-forest-dark mt-3 mb-6 leading-tight">
               Welcome to Bentota Samantha Tours & Travels
             </h2>
-            <p className="text-forest-text leading-relaxed mb-8">
-              Samantha tours & travels is a joint venture with thoroughly Srilankan roots.Samantha tours & travels main ambition is to be a brand leader in tourist and leisure industry.
-              We have long association with European tour operators and our clientele base is essentially Europeans.
-              Our clientele base is thoroughly heterogeneous and we cater to the different taste of our clients to their maximum satisfaction.
-              Our motto is safety and satisfaction of our clients.
-              Our wealth is goodwill of our clients.
-              We highly regard privacy of our clients.
+            <p className="text-forest-text leading-relaxed mb-8 text-justify">
+              Samantha Tours & Travels is a joint venture with thoroughly Sri Lankan roots. Samantha Tours & Travels’ main ambition is to be a brand leader in the tourist and leisure industry. We have long associations with leading international tour operators, and our clientele base spans travelers from across the globe. Our clientele base is thoroughly diverse, and we cater to the distinct tastes of our clients to their maximum satisfaction. Our motto is the safety and satisfaction of our clients. Our wealth is the goodwill of our clients. We highly regard the privacy of our clients.
             </p>
 
             <div className="grid grid-cols-3 gap-6 border-t border-gray-100 pt-8">

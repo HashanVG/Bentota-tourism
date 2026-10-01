@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react'
-import { FaWhatsapp, FaFacebookF, FaTripadvisor } from 'react-icons/fa'
+import { FaWhatsapp, FaFacebookF, FaTripadvisor, FaInstagram } from 'react-icons/fa'
 import contactBg from '../../assets/contact/contact.jpg'
 
 const fadeUp = {
@@ -39,7 +39,7 @@ const infoCards = [
   {
     Icon: MapPin,
     label: 'Location',
-    value: 'Galle Road, Bentota, Sri Lanka, 80500',
+    value: 'Galle Road, Bentota, Sri Lanka.',
     href: 'https://www.google.com/maps/search/?api=1&query=Galle+Road+Bentota+Sri+Lanka',
   },
   {
@@ -288,7 +288,7 @@ export default function ContactPage() {
 
             <div className="rounded-2xl border border-gray-100 p-6">
               <p className="text-xs uppercase tracking-widest text-gray-400 font-semibold mb-4">Follow Along</p>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 flex-wrap">
                 <a
                   href='https://www.tripadvisor.com/Attraction_Review-g297895-d25310753-Reviews-Bentota_Samantha_Tours_Travels-Bentota_Galle_District_Southern_Province.html'
                   target='_blank'
@@ -306,6 +306,15 @@ export default function ContactPage() {
                   className="w-14 h-14 rounded-full bg-[#1877F2] hover:bg-[#166fe5] flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-md cursor-pointer"
                 >
                   <FaFacebookF className="w-6 h-6 text-white" />
+                </a>
+                <a
+                  href='https://www.instagram.com/samantha_pushpalal?stkn=NmpuM3pvajBya3Zn'
+                  target='_blank'
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="w-14 h-14 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] hover:opacity-90 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-md cursor-pointer"
+                >
+                  <FaInstagram className="w-7 h-7 text-white" />
                 </a>
                 <a
                   href='https://wa.me/94772408371'

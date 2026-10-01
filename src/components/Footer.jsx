@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { FaFacebookF, FaTripadvisor, FaWhatsapp } from 'react-icons/fa'
+import { FaFacebookF, FaTripadvisor, FaWhatsapp, FaInstagram } from 'react-icons/fa'
 import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react'
 import logo from '../assets/logo/ChatGPT Image Sep 30, 2026, 10_37_52 PM.png'
 
@@ -13,7 +13,7 @@ export default function Footer() {
     { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Excursions', href: '/excursions' },
-    { name: 'Activities', href: '/activities' },
+    { name: 'Round Tour', href: '/round-tour' },
     { name: 'Contact Us', href: '/contact' }
   ]
 
@@ -90,6 +90,16 @@ export default function Footer() {
               </a>
 
               <a
+                href='https://www.instagram.com/samantha_pushpalal?stkn=NmpuM3pvajBya3Zn'
+                target='_blank'
+                rel='noopener noreferrer'
+                aria-label='Instagram'
+                className="w-10 h-10 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] hover:opacity-90 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 shadow-md cursor-pointer"
+              >
+                <FaInstagram className="w-4.5 h-4.5 text-white" />
+              </a>
+
+              <a
                 href='https://wa.me/94772408371'
                 target='_blank'
                 rel="noopener noreferrer"
@@ -109,7 +119,10 @@ export default function Footer() {
             <ul className="space-y-3">
               {exploreLinks.map((item) => (
                 <li key={item.name}>
-                  <Link to={item.href} className="text-sm text-gray-400 hover:text-forest-primary-light transition-colors">
+                  <Link
+                    to={item.href}
+                    className="text-sm text-gray-400 hover:text-forest-primary-light transition-colors"
+                  >
                     {item.name}
                   </Link>
                 </li>
@@ -138,7 +151,7 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-gray-400">
               <li className="flex items-start gap-2.5">
                 <MapPin className="w-4 h-4 mt-0.5 text-forest-primary shrink-0" strokeWidth={1.5} />
-                <span>Galle Road, Bentota,<br />Sri Lanka, 80500</span>
+                <span>Galle Road, Bentota,<br />Sri Lanka.</span>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="w-4 h-4 text-forest-primary shrink-0" strokeWidth={1.5} />

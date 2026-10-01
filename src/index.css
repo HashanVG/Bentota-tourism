@@ -10,6 +10,8 @@
   --color-forest-dark: #1C1917;
   --color-forest-text: #44403C;
   --font-display: 'Fraunces', serif;
+  --font-nav: 'Montserrat', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', sans-serif;
 }
 
 .nav-link--active {

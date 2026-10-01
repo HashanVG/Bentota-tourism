@@ -4,6 +4,7 @@ import DefaultLayout from './layouts/AuthorizedUserLaysout.jsx';
 import GuestLayout from './layouts/GuestUserLayout.jsx';
 import HomePage from './pages/default/HomePage.jsx';
 import AboutPage from './pages/default/AboutPage.jsx';
+import ContactPage from './pages/default/ContactPage.jsx';
 import RoundTourPage from './pages/default/RoundTourPage.jsx';
 import ExcursionsPage from './pages/default/ExcursionsPage.jsx';
 import ExcursionDetailPage from './pages/default/ExcursionDetailPage.jsx';

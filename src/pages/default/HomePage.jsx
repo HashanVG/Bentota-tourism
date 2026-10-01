@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useNavigate } from 'react-router-dom'
 import {
@@ -10,8 +10,15 @@ import {
   Star,
   Quote,
   Phone,
+  PenLine,
+  ShieldCheck,
 } from 'lucide-react'
 import {FaTripadvisor} from 'react-icons/fa'
+import ReviewModal from '../../components/ReviewModal'
+import { 
+  subscribeToLatestReviews, 
+  calculateAverageRating, 
+} from '../../services/reviewService'
 import hero from '../../assets/home/hero.svg'
 import about1 from '../../assets/about/about5.jpg'
 import about2 from '../../assets/about/about4.webp'
@@ -35,32 +42,7 @@ const excursions = [
 
 ]
 
-const reviews = [
-  {
-    name: 'Dani Sara',
-    location: 'Italy',
-    rating: 5,
-    text: "We met Sam ( Samantha ) randomly and are so glad about that! He's the friendliest and fairest Guide we could met at Sri Lanka. We made two great trips with him - a Daytrip to Sigiriya Rock and a Two-days-Trip to Yala National Park and Ella. Sam offered us really fair prices and showed himself as a non intrusive, informative, fair and absolutely friendly human being! I would recommend Sam to anyone who wants to do excursions in Sri Lanka and if I should ever visit Sri Lanka again, Sam will be my first contact of choice",
-  },
-  {
-    name: 'Caroline Bennett',
-    location: 'United Kingdom',
-    rating: 5,
-    text: "I was only with Sam for a couple of days travelling from Bentota up to the Dambulla area and back but would highly recommend him.  He speaks excellent English, is very knowledgeable about the country, the wildlife, the culture etc.  And most important of all is an excellent driver - I felt very safe in on roads which actutally seem very dangerous with crazy bus drivers and hundreds of tuk-tuks. Would certainly contact him again if I want to do a tour in the future.  Thank you Sam!",
-  },
-  {
-    name: 'Laura G',
-    location: 'Australia',
-    rating: '5',
-    text: 'During our Sri Lanka holiday in Bentota (November 2025) we had the opportunity to meet Samantha. Since our stay was relatively short we decided to book with Samantha a 2-day tour to the mountains with an overnight stay. It was 2 days of fun and we learned a lot about the country and the people. Samantha speaks good German and of course English. He likes to respond to individual wishes and has been able to tell us a lot about ethnic groups , religions and the history of the country. He has always been punctual and reliable. We can highly recommend him with a clear conscience as an organizer and tour guide.  Thank you Sam!',
-  },
-  {
-    name: 'Mary Kennedy',
-    location: 'United Kingdom',
-    rating: 5,
-    text: "Sam was entertaining, informative and knowledgeable. We felt in safe hands under his guidance. We had a brilliant day at Yala, all of which was facilitated by Sam. Huge thanks to you Sam, from Mary & Nigel",
-  },
-]
+
 
 {/*Multiple lines for the background */ }
 function TopoLines({ opacity = 0.08, count = 6, viewBox = '0 0 1000 600' }) {
@@ -84,18 +66,81 @@ function TopoLines({ opacity = 0.08, count = 6, viewBox = '0 0 1000 600' }) {
   )
 }
 
+function DecimalStars({ rating, size = "w-3.5 h-3.5" }) {
+  return (
+    <div className="flex items-center gap-0.5">
+      {[0, 1, 2, 3, 4].map((i) => {
+        let fillPercent = 0;
+        if (rating >= i + 1) {
+          fillPercent = 100;
+        } else if (rating > i) {
+          fillPercent = Math.round((rating - i) * 100);
+        }
+
+        return (
+          <div key={i} className={`relative ${size} inline-block shrink-0`}>
+            {/* Background empty gray star */}
+            <Star className={`${size} text-gray-200 fill-gray-200`} />
+            
+            {/* Foreground filled gold star clipped by exact percentage */}
+            {fillPercent > 0 && (
+              <div
+                className="absolute top-0 left-0 h-full overflow-hidden pointer-events-none"
+                style={{ width: `${fillPercent}%` }}
+              >
+                <Star
+                  className={`${size} fill-forest-gold text-forest-gold max-w-none shrink-0`}
+                  style={{ width: '0.875rem', height: '0.875rem', minWidth: '0.875rem' }}
+                />
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function HomePage() {
 
   const navigate = useNavigate();
   const [reviewIndex, setReviewIndex] = useState(0)
   const [reviewDirection, setReviewDirection] = useState(1)
+  const [reviewsFromDb, setReviewsFromDb] = useState([])
+  const [isLoadingReviews, setIsLoadingReviews] = useState(true)
+  const [isReviewModalOpen, setIsReviewModalOpen] = useState(false)
+
+  // Real-time synchronization directly from Firebase Firestore:
+  // If a review is added or deleted in Firebase, onSnapshot updates state instantly
+  useEffect(() => {
+    const unsubscribe = subscribeToLatestReviews((fetchedReviews) => {
+      setReviewsFromDb(fetchedReviews || []);
+      setIsLoadingReviews(false);
+    }, 10);
+
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
+  }, []);
+
+  // Display up to 10 latest reviews directly from the database (newest to oldest)
+  const displayedReviews = useMemo(() => {
+    return reviewsFromDb.slice(0, 10);
+  }, [reviewsFromDb]);
+
+  // Average star rating calculated across ALL reviews in the database (updates dynamically)
+  const reviewStats = useMemo(() => {
+    return calculateAverageRating(reviewsFromDb);
+  }, [reviewsFromDb]);
 
   const goToReview = (dir) => {
-    setReviewDirection(dir)
-    setReviewIndex((prev) => (prev + dir + reviews.length) % reviews.length)
-  }
+    if (displayedReviews.length <= 1) return;
+    setReviewDirection(dir);
+    setReviewIndex((prev) => (prev + dir + displayedReviews.length) % displayedReviews.length);
+  };
 
-  const activeReview = reviews[reviewIndex]
+  const safeReviewIndex = displayedReviews.length > 0 && reviewIndex < displayedReviews.length ? reviewIndex : 0;
+  const activeReview = displayedReviews[safeReviewIndex];
 
   return (
     <>
@@ -341,77 +386,133 @@ export default function HomePage() {
       <section className="bg-white py-24 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <span className="text-xs uppercase tracking-[0.25em] text-forest-primary font-semibold">
-            Reviews
+            From the trail log
           </span>
-          <h2 className="font-display text-4xl sm:text-5xl text-forest-dark mt-3 mb-14">
-            From the trail log.
+          <h2 className="font-display text-4xl sm:text-5xl text-forest-dark mt-3 mb-4">
+            Our Latest Reviews
           </h2>
 
-          <div className="relative min-h-55 flex items-center justify-center">
-            <AnimatePresence mode="wait" custom={reviewDirection}>
-              <motion.div
-                key={reviewIndex}
-                custom={reviewDirection}
-                initial={{ opacity: 0, x: reviewDirection * 40 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: reviewDirection * -40 }}
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
-                className="w-full"
-              >
-                <Quote className="w-8 h-8 text-forest-accent mx-auto mb-5" strokeWidth={1.5} />
-
-                <p className="font-display text-md lg:text-xl text-forest-dark leading-snug mb-6">
-                  "{activeReview.text}"
-                </p>
-
-                <div className="flex justify-center gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`w-4 h-4 ${i < activeReview.rating ? 'fill-forest-gold text-forest-gold' : 'text-gray-200'}`}
-                    />
-                  ))}
-                </div>
-
-                <div className="flex items-center justify-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-forest-primary text-white flex items-center justify-center font-semibold text-sm">
-                    {activeReview.name.charAt(0)}
-                  </div>
-                  <div className="text-left">
-                    <p className="text-sm font-semibold text-forest-dark">{activeReview.name}</p>
-                    <p className="text-xs text-gray-500">{activeReview.location}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+          {/* Average Rating Bar */}
+          <div className="flex items-center justify-center mb-12">
+            <div className="inline-flex items-center gap-2.5 bg-forest-primary/5 border border-forest-primary/15 rounded-full px-4 py-2">
+              <DecimalStars rating={reviewStats.count > 0 ? reviewStats.average : 5.0} />
+              <span className="text-sm font-bold text-forest-dark whitespace-nowrap">
+                {reviewStats.count > 0 ? reviewStats.average.toFixed(1) : '5.0'}
+              </span>
+              <span className="text-xs text-gray-500 border-l border-gray-200 pl-2.5 whitespace-nowrap">
+                Based on Web Reviews
+              </span>
+            </div>
           </div>
 
-          <div className="flex items-center justify-center gap-4 mt-12">
-            <button
-              onClick={() => goToReview(-1)}
-              aria-label="Previous review"
-              className="w-11 h-11 rounded-full border border-gray-200 flex items-center justify-center text-forest-dark hover:bg-forest-primary hover:text-white hover:border-forest-primary transition-colors duration-300"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-
-            <div className="flex gap-2">
-              {reviews.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => { setReviewDirection(i > reviewIndex ? 1 : -1); setReviewIndex(i) }}
-                  aria-label={`Go to review ${i + 1}`}
-                  className={`w-2 h-2 rounded-full transition-colors ${i === reviewIndex ? 'bg-forest-primary' : 'bg-gray-200'}`}
-                />
-              ))}
+          {displayedReviews.length === 0 ? (
+            <div className="py-12 px-6 rounded-2xl bg-gray-50 border border-gray-100 max-w-md mx-auto my-6 text-center">
+              <Quote className="w-8 h-8 text-forest-accent mx-auto mb-3" strokeWidth={1.5} />
+              <p className="font-display text-lg text-forest-dark font-medium mb-1">No reviews yet</p>
+              <p className="text-xs text-gray-500 mb-5">Be the first traveler to share your tour experience!</p>
             </div>
+          ) : (
+            <>
+              <div className="relative min-h-55 flex items-center justify-center">
+                <AnimatePresence mode="wait" custom={reviewDirection}>
+                  <motion.div
+                    key={safeReviewIndex}
+                    custom={reviewDirection}
+                    initial={{ opacity: 0, x: reviewDirection * 40 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: reviewDirection * -40 }}
+                    transition={{ duration: 0.4, ease: 'easeInOut' }}
+                    className="w-full"
+                  >
+                    <Quote className="w-8 h-8 text-forest-accent mx-auto mb-5" strokeWidth={1.5} />
 
+                    <p className="font-display text-md lg:text-xl text-forest-dark leading-snug mb-6">
+                      "{activeReview?.text}"
+                    </p>
+
+                    <div className="flex justify-center gap-1 mb-4">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className={`w-4 h-4 ${
+                            i < (activeReview?.rating || 5)
+                              ? 'fill-forest-gold text-forest-gold'
+                              : 'text-gray-200'
+                          }`}
+                        />
+                      ))}
+                    </div>
+
+                    <div className="flex items-center justify-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-forest-primary text-white flex items-center justify-center font-semibold text-sm">
+                        {activeReview?.name?.charAt(0) || 'G'}
+                      </div>
+                      <div className="text-left">
+                        <p className="text-sm font-semibold text-forest-dark">{activeReview?.name}</p>
+                        <p className="text-xs text-gray-500">{activeReview?.location}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+
+              {displayedReviews.length > 1 && (
+                <div className="flex items-center justify-center gap-4 mt-12">
+                  <button
+                    onClick={() => goToReview(-1)}
+                    aria-label="Previous review"
+                    className="w-11 h-11 rounded-full border border-gray-200 flex items-center justify-center text-forest-dark hover:bg-forest-primary hover:text-white hover:border-forest-primary transition-colors duration-300 cursor-pointer"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+
+                  <div className="flex items-center gap-1.5">
+                    {(() => {
+                      const maxDots = 4;
+                      const total = displayedReviews.length;
+                      const count = Math.min(maxDots, total);
+                      const start = total <= maxDots ? 0 : Math.max(0, Math.min(safeReviewIndex - 1, total - maxDots));
+                      return Array.from({ length: count }).map((_, idx) => {
+                        const targetIndex = start + idx;
+                        const isActive = targetIndex === safeReviewIndex;
+                        return (
+                          <button
+                            key={targetIndex}
+                            onClick={() => {
+                              setReviewDirection(targetIndex > safeReviewIndex ? 1 : -1);
+                              setReviewIndex(targetIndex);
+                            }}
+                            aria-label={`Go to review ${targetIndex + 1}`}
+                            className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                              isActive ? 'w-6 bg-forest-primary' : 'w-2 bg-gray-200 hover:bg-gray-300'
+                            }`}
+                          />
+                        );
+                      });
+                    })()}
+                  </div>
+
+                  <button
+                    onClick={() => goToReview(1)}
+                    aria-label="Next review"
+                    className="w-11 h-11 rounded-full border border-gray-200 flex items-center justify-center text-forest-dark hover:bg-forest-primary hover:text-white hover:border-forest-primary transition-colors duration-300 cursor-pointer"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+              )}
+            </>
+          )}
+
+          {/* Enlarged "Write a Review" Button placed below the arrows */}
+          <div className="mt-10 flex justify-center">
             <button
-              onClick={() => goToReview(1)}
-              aria-label="Next review"
-              className="w-11 h-11 rounded-full border border-gray-200 flex items-center justify-center text-forest-dark hover:bg-forest-primary hover:text-white hover:border-forest-primary transition-colors duration-300"
+              type="button"
+              onClick={() => setIsReviewModalOpen(true)}
+              className="inline-flex items-center gap-2.5 px-8 py-3.5 sm:px-10 sm:py-4 rounded-full bg-forest-primary text-white text-base sm:text-lg font-medium hover:bg-forest-primary-light transition-all duration-300 shadow-md hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
             >
-              <ChevronRight className="w-5 h-5" />
+              <PenLine className="w-5 h-5" />
+              Write a Review
             </button>
           </div>
         </div>
@@ -465,6 +566,15 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Review Submission Modal */}
+      <ReviewModal
+        isOpen={isReviewModalOpen}
+        onClose={() => setIsReviewModalOpen(false)}
+        onReviewSubmitted={() => {
+          setReviewIndex(0)
+        }}
+      />
     </>
   )
 }

@@ -56,11 +56,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 pb-16 border-b border-white/10">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-5">
+            <div className="flex items-center gap-2 mb-6">
               <img
                 src={logo}
                 alt="Bentota Samantha Tours & Travels"
-                className="h-14 sm:h-16 w-auto object-contain bg-white rounded-2xl px-3.5 py-2 shadow-md"
+                className="h-24 sm:h-28 w-auto object-contain bg-white rounded-2xl sm:rounded-3xl px-5 py-3.5 shadow-lg"
               />
             </div>
             <p className="text-sm leading-relaxed text-gray-400 max-w-sm">

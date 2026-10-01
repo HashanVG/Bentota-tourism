@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
+import { NavLink, useNavigate, useLocation } from 'react-router-dom'
+import { ChevronDown } from 'lucide-react'
 import logo from '../assets/logo/ChatGPT Image Sep 30, 2026, 10_37_52 PM.png'
+import { excursionCategories } from '../data/excursionsData'
 
 const links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
-  { to: '/excursions', label: 'Excursions' },
+  { to: '/excursions', label: 'Excursions', isDropdown: true },
   { to: '/activities', label: 'Activities' },
   { to: '/contact', label: 'Contact' },
 ]
@@ -13,6 +15,12 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [excursionsDropdownOpen, setExcursionsDropdownOpen] = useState(false)
+  const [mobileExcursionsExpanded, setMobileExcursionsExpanded] = useState(true)
+  const dropdownTimeoutRef = useRef(null)
+
+  const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -27,6 +35,36 @@ export default function Navbar() {
       mainEl.scrollTo({ top: 0, behavior: 'smooth' })
     }
     setMenuOpen(false)
+  }
+
+  const handleExcursionClick = (categoryId) => {
+    setExcursionsDropdownOpen(false)
+    setMenuOpen(false)
+
+    if (categoryId) {
+      window.dispatchEvent(new CustomEvent('select-excursion-category', { detail: categoryId }))
+    }
+
+    if (location.pathname === '/') {
+      const el = document.getElementById('excursions')
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+      }
+    } else {
+      const query = categoryId ? `?category=${categoryId}#excursions` : '#excursions'
+      navigate(`/${query}`)
+    }
+  }
+
+  const handleMouseEnterDropdown = () => {
+    if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current)
+    setExcursionsDropdownOpen(true)
+  }
+
+  const handleMouseLeaveDropdown = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setExcursionsDropdownOpen(false)
+    }, 150)
   }
 
   return (
@@ -48,27 +86,87 @@ export default function Navbar() {
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-8 font-nav">
-          {links.map(({ to, label }) => (
-            <li key={to}>
-              <NavLink
-                to={to}
-                className={({ isActive }) =>
-                  `relative py-1 text-sm font-bold tracking-wider uppercase transition-colors duration-200 ${
-                    isActive ? 'text-forest-primary' : 'text-slate-700 hover:text-forest-primary'
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    {label}
-                    {isActive && (
+          {links.map(({ to, label, isDropdown }) => {
+            if (isDropdown) {
+              const isExcursionActive =
+                location.pathname === '/excursions' || location.hash === '#excursions'
+              return (
+                <li
+                  key={to}
+                  className="relative"
+                  onMouseEnter={handleMouseEnterDropdown}
+                  onMouseLeave={handleMouseLeaveDropdown}
+                >
+                  <button
+                    onClick={() => handleExcursionClick(null)}
+                    className={`relative py-1 text-sm font-bold tracking-wider uppercase transition-colors duration-200 flex items-center gap-1.5 cursor-pointer ${
+                      isExcursionActive || excursionsDropdownOpen
+                        ? 'text-forest-primary'
+                        : 'text-slate-700 hover:text-forest-primary'
+                    }`}
+                  >
+                    <span>{label}</span>
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                        excursionsDropdownOpen ? 'rotate-180 text-forest-primary' : 'text-slate-400'
+                      }`}
+                    />
+                    {isExcursionActive && (
                       <span className="absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-forest-primary rounded-full" />
                     )}
-                  </>
-                )}
-              </NavLink>
-            </li>
-          ))}
+                  </button>
+
+                  {/* Dropdown Menu */}
+                  {excursionsDropdownOpen && (
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-56 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                      <div className="bg-white rounded-2xl shadow-xl border border-gray-100/90 py-2 px-1.5 overflow-hidden">
+                        {excursionCategories.map((cat) => {
+                          const isSpecial = cat.id === 'special'
+                          return (
+                            <button
+                              key={cat.id}
+                              onClick={() => handleExcursionClick(cat.id)}
+                              className="w-full text-left px-3.5 py-1.5 rounded-xl font-nav text-[13px] font-bold tracking-wider uppercase text-slate-700 hover:text-forest-primary hover:bg-forest-primary/5 transition-colors cursor-pointer whitespace-nowrap flex items-center group"
+                            >
+                              {isSpecial ? (
+                                <span className="bg-red-600 group-hover:bg-red-700 text-white px-2.5 py-1 rounded-md shadow-xs transition-colors">
+                                  {cat.label}
+                                </span>
+                              ) : (
+                                cat.label
+                              )}
+                            </button>
+                          )
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </li>
+              )
+            }
+
+            return (
+              <li key={to}>
+                <NavLink
+                  to={to}
+                  className={({ isActive }) =>
+                    `relative py-1 text-sm font-bold tracking-wider uppercase transition-colors duration-200 ${
+                      isActive ? 'text-forest-primary' : 'text-slate-700 hover:text-forest-primary'
+                    }`
+                  }
+                >
+                  {({ isActive }) => (
+                    <>
+                      {label}
+                      {isActive && (
+                        <span className="absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-forest-primary rounded-full" />
+                      )}
+                    </>
+                  )}
+                </NavLink>
+              </li>
+            )
+          })}
         </ul>
 
         {/* Mobile hamburger */}
@@ -98,22 +196,64 @@ export default function Navbar() {
       {/* Mobile dropdown menu */}
       {menuOpen && (
         <div className="md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-lg font-nav">
-          <ul className="flex flex-col px-6 py-4 gap-3">
-            {links.map(({ to, label }) => (
-              <li key={to}>
-                <NavLink
-                  to={to}
-                  onClick={() => setMenuOpen(false)}
-                  className={({ isActive }) =>
-                    `block text-sm font-bold tracking-wider uppercase py-2 transition-colors duration-200 ${
-                      isActive ? 'text-forest-primary' : 'text-slate-700 hover:text-forest-primary'
-                    }`
-                  }
-                >
-                  {label}
-                </NavLink>
-              </li>
-            ))}
+          <ul className="flex flex-col px-6 py-4 gap-2">
+            {links.map(({ to, label, isDropdown }) => {
+              if (isDropdown) {
+                return (
+                  <li key={to} className="py-1">
+                    <button
+                      onClick={() => setMobileExcursionsExpanded(!mobileExcursionsExpanded)}
+                      className="w-full flex items-center justify-between text-sm font-bold tracking-wider uppercase py-2 text-slate-700 hover:text-forest-primary transition-colors cursor-pointer"
+                    >
+                      <span>{label}</span>
+                      <ChevronDown
+                        className={`w-4 h-4 transition-transform duration-200 ${
+                          mobileExcursionsExpanded ? 'rotate-180 text-forest-primary' : 'text-slate-400'
+                        }`}
+                      />
+                    </button>
+                    {mobileExcursionsExpanded && (
+                      <div className="pl-3 pr-2 py-1 flex flex-col gap-1 border-l-2 border-forest-primary/30 ml-2 mt-1">
+                        {excursionCategories.map((cat) => {
+                          const isSpecial = cat.id === 'special'
+                          return (
+                            <button
+                              key={cat.id}
+                              onClick={() => handleExcursionClick(cat.id)}
+                              className="text-left py-1.5 px-3 font-nav text-[13px] font-bold tracking-wider uppercase text-slate-700 hover:text-forest-primary hover:bg-forest-primary/5 rounded-lg transition-colors cursor-pointer flex items-center group"
+                            >
+                              {isSpecial ? (
+                                <span className="bg-red-600 group-hover:bg-red-700 text-white px-2.5 py-1 rounded-md shadow-xs transition-colors">
+                                  {cat.label}
+                                </span>
+                              ) : (
+                                cat.label
+                              )}
+                            </button>
+                          )
+                        })}
+                      </div>
+                    )}
+                  </li>
+                )
+              }
+
+              return (
+                <li key={to}>
+                  <NavLink
+                    to={to}
+                    onClick={() => setMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `block text-sm font-bold tracking-wider uppercase py-2 transition-colors duration-200 ${
+                        isActive ? 'text-forest-primary' : 'text-slate-700 hover:text-forest-primary'
+                      }`
+                    }
+                  >
+                    {label}
+                  </NavLink>
+                </li>
+              )
+            })}
           </ul>
         </div>
       )}

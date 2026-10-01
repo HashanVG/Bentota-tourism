@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import {
   ArrowDown,
   ArrowRight,
@@ -20,26 +20,18 @@ import {
   calculateAverageRating, 
 } from '../../services/reviewService'
 import hero from '../../assets/home/hero.svg'
+import heroMobile from '../../assets/fba82c73204c5d020e8ce08eaa4a9cb0.jpg'
 import about1 from '../../assets/about/about5.jpg'
 import about2 from '../../assets/about/about4.webp'
 import cta from '../../assets/cta/cta2.jpg'
 import rate from '../../assets/home/ratings.jpg'
+import { excursionCategories, excursions } from '../../data/excursionsData'
 
 {/*Data for the relevant sections*/ }
 const stats = [
   { value: 'x+', label: 'Excursions run' },
   { value: 'x', label: 'Locations' },
   { value: 'x', label: 'Years on the trail' },
-]
-
-const excursions = [
-  { title: 'Bentota River Safari', duration: '', price: '', image: '' },
-  { title: 'Bentota River Safari', duration: '', price: '', image: '' },
-  { title: 'Bentota River Safari', duration: '', price: '', image: '' },
-  { title: 'Bentota River Safari', duration: '', price: '', image: '' },
-  { title: 'Bentota River Safari', duration: '', price: '', image: '' },
-  { title: 'Bentota River Safari', duration: '', price: '', image: '' },
-
 ]
 
 
@@ -104,11 +96,46 @@ function DecimalStars({ rating, size = "w-3.5 h-3.5" }) {
 export default function HomePage() {
 
   const navigate = useNavigate();
+  const location = useLocation();
   const [reviewIndex, setReviewIndex] = useState(0)
   const [reviewDirection, setReviewDirection] = useState(1)
   const [reviewsFromDb, setReviewsFromDb] = useState([])
   const [isLoadingReviews, setIsLoadingReviews] = useState(true)
   const [isReviewModalOpen, setIsReviewModalOpen] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState('one-day')
+
+  const filteredExcursions = useMemo(() => {
+    return excursions.filter((trip) => trip.category === selectedCategory)
+  }, [selectedCategory])
+
+  // Sync category selection with Navbar clicks or URL parameters
+  useEffect(() => {
+    const handleCategoryEvent = (e) => {
+      if (e.detail && ['one-day', 'two-day', 'special'].includes(e.detail)) {
+        setSelectedCategory(e.detail)
+      }
+    }
+    window.addEventListener('select-excursion-category', handleCategoryEvent)
+
+    const params = new URLSearchParams(location.search)
+    const cat = params.get('category')
+    if (cat && ['one-day', 'two-day', 'special'].includes(cat)) {
+      setSelectedCategory(cat)
+    }
+
+    if (location.hash === '#excursions') {
+      setTimeout(() => {
+        const el = document.getElementById('excursions')
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 150)
+    }
+
+    return () => {
+      window.removeEventListener('select-excursion-category', handleCategoryEvent)
+    }
+  }, [location])
 
   // Real-time synchronization directly from Firebase Firestore:
   // If a review is added or deleted in Firebase, onSnapshot updates state instantly
@@ -146,11 +173,18 @@ export default function HomePage() {
     <>
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section className="relative h-screen min-h-150 w-full overflow-hidden bg-forest-dark">
-        {/* Replace with your own background image */}
+        {/* Mobile View Background (< md) */}
+        <img
+          src={heroMobile}
+          alt="Sigiriya Sri Lanka"
+          className="absolute inset-0 w-full h-full object-cover object-center md:hidden"
+        />
+
+        {/* Desktop View Background (>= md) */}
         <img
           src={hero}
-          alt="hero"
-          className="absolute -top-72 sm:-top-80 md:top-0 inset-x-0 w-full h-[calc(100%+18rem)] sm:h-[calc(100%+20rem)] md:h-full object-cover object-center"
+          alt="Bentota Sri Lanka"
+          className="absolute inset-0 w-full h-full object-cover object-center hidden md:block"
         />
         <div className="absolute inset-0 bg-linear-to-b from-forest-dark/70 via-forest-dark/50 to-forest-dark" />
         <TopoLines />
@@ -274,7 +308,7 @@ export default function HomePage() {
       {/* ── Excursions ────────────────────────────────────────────────── */}
       <section id="excursions" className="bg-gray-50 py-16 sm:py-24 px-3 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-14 px-1 sm:px-0">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-8 sm:mb-14 px-1 sm:px-0">
             <div>
               <span className="text-xs uppercase tracking-[0.25em] text-forest-primary font-semibold">
                 Excursions
@@ -283,16 +317,40 @@ export default function HomePage() {
                 Pick your tour.
               </h2>
             </div>
+
+            {/* Category tabs: One-Day Trips, Two-Day Trips, Special Trips */}
+            <div className="inline-flex p-1.5 bg-gray-200/80 rounded-full gap-1 border border-gray-300/60 self-start sm:self-auto overflow-x-auto max-w-full">
+              {excursionCategories.map((cat) => {
+                const isActive = selectedCategory === cat.id
+                const isSpecial = cat.id === 'special'
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setSelectedCategory(cat.id)}
+                    className={`px-4 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer ${
+                      isActive
+                        ? isSpecial
+                          ? 'bg-red-600 text-white shadow-md'
+                          : 'bg-forest-primary text-white shadow-sm'
+                        : isSpecial
+                          ? 'bg-red-50 text-red-600 hover:bg-red-100'
+                          : 'text-forest-dark/75 hover:text-forest-primary hover:bg-white/70'
+                    }`}
+                  >
+                    {cat.label}
+                  </button>
+                )
+              })}
+            </div>
           </div>
 
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
-            {excursions.map((trip, i) => (
+            {filteredExcursions.map((trip, i) => (
               <motion.div
-                key={trip.title + i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-60px' }}
-                transition={{ duration: 0.5, delay: i * 0.05 }}
+                key={`${trip.category}-${trip.id || i}`}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: i * 0.05 }}
                 className="group relative rounded-xl sm:rounded-2xl overflow-hidden bg-white shadow-xs hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between"
               >
                 <div>
@@ -313,21 +371,32 @@ export default function HomePage() {
                     <h3 className="font-display text-xs sm:text-base md:text-lg text-forest-dark leading-snug line-clamp-2">
                       {trip.title}
                     </h3>
-                    <div className="flex items-center justify-between mt-2 sm:mt-4 text-[11px] sm:text-sm text-gray-500">
-                      <span className="flex items-center gap-1">
-                        <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> {trip.duration || '2-3 hrs'}
-                      </span>
-                      {trip.price && (
-                        <span className="font-semibold text-forest-secondary">{trip.price}</span>
-                      )}
-                    </div>
+                    {(trip.duration || trip.price) && (
+                      <div className="flex items-center justify-between mt-2 sm:mt-4 text-[11px] sm:text-sm text-gray-500">
+                        {trip.duration ? (
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" /> {trip.duration}
+                          </span>
+                        ) : <div />}
+                        {trip.price && (
+                          <span className="font-semibold text-forest-secondary">{trip.price}</span>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
 
                 <div className="pt-1 pb-3 px-2.5 sm:pt-3 sm:pb-6 sm:px-6">
                   <button
-                    onClick={() => navigate(`/excursions/${trip.title.toLowerCase().replace(/\s+/g, '-')}`)}
-                    className="text-white bg-forest-primary font-semibold hover:bg-forest-primary-light w-full text-center border rounded-lg py-1.5 sm:py-2 text-[11px] sm:text-sm transition-colors cursor-pointer"
+                    onClick={() =>
+                      navigate(
+                        `/excursions/${
+                          trip.slug ||
+                          trip.title.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-')
+                        }`
+                      )
+                    }
+                    className="text-white bg-forest-primary font-semibold hover:bg-forest-primary-light w-full text-center rounded-lg py-2 text-xs sm:text-sm transition-colors cursor-pointer"
                   >
                     Read More
                   </button>

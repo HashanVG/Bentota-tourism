@@ -68,20 +68,33 @@ export default function ContactPage() {
 
   const sendEmail = (e) => {
     e.preventDefault()
-    setStatus('sending')
 
     const form = formRef.current
     const formData = new FormData(form)
-    const visitorEmail = formData.get('reply_to') || formData.get('from_email') || ''
+
+    const from_name = formData.get('from_name')?.toString().trim() || ''
+    const visitorEmail = (formData.get('reply_to')?.toString() || formData.get('from_email')?.toString() || '').trim()
+    const phone = formData.get('phone')?.toString().trim() || ''
+    const country = formData.get('country')?.toString().trim() || ''
+    const subject = formData.get('subject')?.toString().trim() || ''
+    const message = formData.get('message')?.toString().trim() || ''
+
+    // Strict validation: Every detail must be filled in
+    if (!from_name || !visitorEmail || !phone || !country || !subject || !message) {
+      setStatus('empty_fields')
+      return
+    }
+
+    setStatus('sending')
 
     const templateParams = {
-      from_name: formData.get('from_name'),
+      from_name,
       reply_to: visitorEmail,
       user_email: visitorEmail,
-      phone: formData.get('phone'),
-      country: formData.get('country'),
-      subject: formData.get('subject') || 'New Website Inquiry',
-      message: formData.get('message'),
+      phone,
+      country,
+      subject,
+      message,
     }
 
     emailjs
@@ -190,7 +203,9 @@ export default function ContactPage() {
               <form ref={formRef} onSubmit={sendEmail} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">Name</label>
+                    <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
+                      Name <span className="text-red-500">*</span>
+                    </label>
                     <input
                       type="text"
                       name="from_name"
@@ -200,7 +215,9 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">Email</label>
+                    <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
+                      Email <span className="text-red-500">*</span>
+                    </label>
                     <input
                       type="email"
                       name="reply_to"
@@ -212,7 +229,9 @@ export default function ContactPage() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">Phone</label>
+                    <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
+                      Phone <span className="text-red-500">*</span>
+                    </label>
                     <input
                       type="tel"
                       name="phone"
@@ -222,7 +241,9 @@ export default function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">Country</label>
+                    <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
+                      Country <span className="text-red-500">*</span>
+                    </label>
                     <input
                       type="text"
                       name="country"
@@ -234,17 +255,22 @@ export default function ContactPage() {
                 </div>
 
                 <div>
-                  <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">Subject</label>
+                  <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
+                    Subject <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
                     name="subject"
+                    required
                     placeholder="Trip enquiry, availability, custom request..."
                     className="w-full bg-white/5 border border-forest-primary/20 rounded-lg px-4 py-3 text-sm text-forest-dark placeholder:text-gray-500 focus:outline-none focus:border-forest-primary transition-colors"
                   />
                 </div>
 
                 <div>
-                  <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">Message</label>
+                  <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">
+                    Message <span className="text-red-500">*</span>
+                  </label>
                   <textarea
                     name="message"
                     required
@@ -258,21 +284,27 @@ export default function ContactPage() {
                   whileHover={{ x: 2 }}
                   type="submit"
                   disabled={status === 'sending'}
-                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-forest-primary text-white font-semibold px-8 py-3.5 rounded-lg hover:bg-forest-primary-light transition-colors"
+                  className="w-full sm:w-auto flex items-center justify-center gap-2 bg-forest-primary text-white font-semibold px-8 py-3.5 rounded-lg hover:bg-forest-primary-light transition-colors cursor-pointer"
                 >
                   {status === 'sending' ? 'Sending...' : 'Send Message'}
                   {status !== 'sending' && <Send className="w-4 h-4" />}
                 </motion.button>
 
                 {status === 'success' && (
-                  <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="text-forest-dark text-sm">
-                    Message sent — We'll get back to you soon.
-                  </motion.p>
+                  <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm">
+                    <p className="font-semibold">Message sent successfully!</p>
+                    <p className="text-xs text-emerald-700 mt-0.5">We will get back to you soon. You can send another message anytime.</p>
+                  </motion.div>
+                )}
+                {status === 'empty_fields' && (
+                  <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-sm">
+                    <p className="font-medium">Please fill in all details—no fields can be left blank.</p>
+                  </motion.div>
                 )}
                 {status === 'error' && (
-                  <motion.p initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="text-red-400 text-sm">
-                    Something went wrong. Please try again, or email us directly.
-                  </motion.p>
+                  <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} className="p-3.5 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
+                    <p className="font-medium">Something went wrong. Please try again, or email us directly.</p>
+                  </motion.div>
                 )}
               </form>
             </div>

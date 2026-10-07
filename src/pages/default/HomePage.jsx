@@ -167,14 +167,13 @@ export default function HomePage() {
     };
   }, []);
 
-  // Retrieve reviews directly from Firebase Firestore in real time
+  // Retrieve up to 10 latest reviews directly from Firebase Firestore in real time
   const displayedReviews = useMemo(() => {
-    // Only real reviews from Firestore (tripadvisor reviews and website reviews)
-    const active = reviewsFromDb.filter((r) => r.source === 'tripadvisor' || r.source === 'website');
-    if (active.length > 0) {
-      return active.slice(0, 10);
-    }
-    return reviewsFromDb.filter((r) => r.source !== 'test').slice(0, 10);
+    // Shows up to 10 most recent reviews from Firestore.
+    // As new reviews come in, older reviews stop appearing beyond 10 items.
+    return reviewsFromDb
+      .filter((r) => r.source !== 'test')
+      .slice(0, 10);
   }, [reviewsFromDb]);
 
   // Average star rating calculated across displayed reviews (updates dynamically)
@@ -509,11 +508,6 @@ export default function HomePage() {
                       <div className="text-left">
                         <p className="text-sm font-semibold text-forest-dark">{activeReview?.name}</p>
                         <p className="text-xs text-gray-500">{activeReview?.location}</p>
-                        {activeReview?.tripType && (
-                          <p className="text-[11px] text-gray-400 mt-0.5">
-                            {activeReview.tripType} {activeReview.visitedDate ? `• ${activeReview.visitedDate}` : ''}
-                          </p>
-                        )}
                       </div>
                     </div>
                   </motion.div>
@@ -532,10 +526,10 @@ export default function HomePage() {
 
                   <div className="flex items-center gap-1.5">
                     {(() => {
-                      const maxDots = 6;
+                      const maxDots = 10;
                       const total = displayedReviews.length;
                       const count = Math.min(maxDots, total);
-                      const start = total <= maxDots ? 0 : Math.max(0, Math.min(safeReviewIndex - 2, total - maxDots));
+                      const start = total <= maxDots ? 0 : Math.max(0, Math.min(safeReviewIndex - 4, total - maxDots));
                       return Array.from({ length: count }).map((_, idx) => {
                         const targetIndex = start + idx;
                         const isActive = targetIndex === safeReviewIndex;

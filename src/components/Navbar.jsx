@@ -83,27 +83,42 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 h-[90px] bg-white/95 backdrop-blur-md border-b transition-colors duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 h-[78px] lg:h-[86px] bg-white/95 backdrop-blur-md border-b transition-colors duration-200 ${
         scrolled
           ? 'border-gray-200/80 shadow-xs'
           : 'border-transparent'
       }`}
     >
-      <div className="max-w-screen-2xl mx-auto h-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto h-full px-4 sm:px-6 lg:px-8 xl:px-12 flex items-center justify-between">
         <NavLink to="/" onClick={handleLogoClick} className="flex items-center shrink-0">
           <img
             src={logo}
             alt="Bentota Samantha Tours & Travels"
-            className="h-11 sm:h-12 md:h-14 lg:h-[56px] xl:h-[68px] w-auto object-contain shrink-0"
+            className="h-11 sm:h-12 md:h-13 lg:h-14 xl:h-[62px] w-auto object-contain shrink-0"
           />
         </NavLink>
 
         {/* Desktop links - shown on lg (1024px+) screens */}
-        <ul className="hidden lg:flex items-center gap-4 xl:gap-7 font-nav shrink-0">
+        <ul className="hidden lg:flex items-center gap-5 xl:gap-8 font-nav shrink-0">
           {links.map(({ to, label, isDropdown, isContactButton, isReview }) => {
+            const isReviewActive = location.hash === '#reviews'
+            const isHomeActive = to === '/' && location.pathname === '/' && !location.hash
+            const isContactActive = location.pathname === '/contact'
+            const isExcursionActive =
+              (location.pathname === '/excursions' || location.hash === '#excursions') && !isReviewActive
+            const isNormalActive = !isReviewActive && location.pathname === to
+
+            const isActive = isDropdown
+              ? isExcursionActive
+              : isContactButton
+              ? isContactActive
+              : isReview
+              ? isReviewActive
+              : to === '/'
+              ? isHomeActive
+              : isNormalActive
+
             if (isDropdown) {
-              const isExcursionActive =
-                location.pathname === '/excursions' || location.hash === '#excursions'
               return (
                 <li
                   key={to}
@@ -113,10 +128,10 @@ export default function Navbar() {
                 >
                   <button
                     onClick={() => handleExcursionClick(null)}
-                    className={`relative py-1 text-xs xl:text-sm font-bold tracking-wider uppercase transition-colors duration-200 flex items-center gap-1 cursor-pointer whitespace-nowrap ${
-                      isExcursionActive || excursionsDropdownOpen
-                        ? 'text-forest-primary'
-                        : 'text-slate-700 hover:text-forest-primary'
+                    className={`relative py-1 text-xs xl:text-sm font-semibold tracking-wider uppercase transition-colors duration-200 flex items-center gap-1.5 cursor-pointer whitespace-nowrap ${
+                      isActive || excursionsDropdownOpen
+                        ? 'text-forest-primary font-bold'
+                        : 'text-slate-600 hover:text-forest-primary'
                     }`}
                   >
                     <span>{label}</span>
@@ -125,8 +140,8 @@ export default function Navbar() {
                         excursionsDropdownOpen ? 'rotate-180 text-forest-primary' : 'text-slate-400'
                       }`}
                     />
-                    {isExcursionActive && (
-                      <span className="absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-forest-primary rounded-full" />
+                    {isActive && (
+                      <span className="absolute -bottom-2 left-0 right-0 h-[2.5px] bg-forest-primary rounded-full" />
                     )}
                   </button>
 
@@ -160,14 +175,13 @@ export default function Navbar() {
             }
 
             if (isContactButton) {
-              const isContactActive = location.pathname === '/contact'
               return (
                 <li key={to}>
                   <NavLink
                     to={to}
-                    className={`inline-flex items-center justify-center px-4 py-2 xl:px-6 xl:py-2.5 rounded-full font-bold text-xs xl:text-sm tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${
-                      isContactActive
-                        ? 'bg-forest-primary text-white shadow-sm ring-2 ring-forest-primary ring-offset-2'
+                    className={`inline-flex items-center justify-center px-5 py-2.5 xl:px-6 xl:py-2.5 rounded-full font-bold text-xs xl:text-sm tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${
+                      isActive
+                        ? 'bg-forest-primary text-white shadow-md ring-2 ring-forest-primary ring-offset-2'
                         : 'bg-forest-primary text-white hover:bg-forest-primary-light shadow-xs hover:shadow-md hover:scale-105 active:scale-95'
                     }`}
                   >
@@ -178,20 +192,19 @@ export default function Navbar() {
             }
 
             if (isReview) {
-              const isReviewActive = location.hash === '#reviews'
               return (
                 <li key={to}>
                   <button
                     onClick={handleReviewClick}
-                    className={`relative py-1 text-xs xl:text-sm font-bold tracking-wider uppercase transition-colors duration-200 font-nav cursor-pointer whitespace-nowrap ${
-                      isReviewActive
-                        ? 'text-forest-primary'
-                        : 'text-slate-700 hover:text-forest-primary'
+                    className={`relative py-1 text-xs xl:text-sm font-semibold tracking-wider uppercase transition-colors duration-200 font-nav cursor-pointer whitespace-nowrap ${
+                      isActive
+                        ? 'text-forest-primary font-bold'
+                        : 'text-slate-600 hover:text-forest-primary'
                     }`}
                   >
                     {label}
-                    {isReviewActive && (
-                      <span className="absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-forest-primary rounded-full" />
+                    {isActive && (
+                      <span className="absolute -bottom-2 left-0 right-0 h-[2.5px] bg-forest-primary rounded-full" />
                     )}
                   </button>
                 </li>
@@ -202,19 +215,13 @@ export default function Navbar() {
               <li key={to}>
                 <NavLink
                   to={to}
-                  className={({ isActive }) =>
-                    `relative py-1 text-xs xl:text-sm font-bold tracking-wider uppercase transition-colors duration-200 whitespace-nowrap ${
-                      isActive ? 'text-forest-primary' : 'text-slate-700 hover:text-forest-primary'
-                    }`
-                  }
+                  className={`relative py-1 text-xs xl:text-sm font-semibold tracking-wider uppercase transition-colors duration-200 whitespace-nowrap ${
+                    isActive ? 'text-forest-primary font-bold' : 'text-slate-600 hover:text-forest-primary'
+                  }`}
                 >
-                  {({ isActive }) => (
-                    <>
-                      {label}
-                      {isActive && (
-                        <span className="absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-forest-primary rounded-full" />
-                      )}
-                    </>
+                  {label}
+                  {isActive && (
+                    <span className="absolute -bottom-2 left-0 right-0 h-[2.5px] bg-forest-primary rounded-full" />
                   )}
                 </NavLink>
               </li>
@@ -251,12 +258,31 @@ export default function Navbar() {
         <div className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-lg font-nav">
           <ul className="flex flex-col px-6 py-4 gap-2">
             {links.map(({ to, label, isDropdown, isContactButton, isReview }) => {
+              const isReviewActive = location.hash === '#reviews'
+              const isHomeActive = to === '/' && location.pathname === '/' && !location.hash
+              const isContactActive = location.pathname === '/contact'
+              const isExcursionActive =
+                (location.pathname === '/excursions' || location.hash === '#excursions') && !isReviewActive
+              const isNormalActive = !isReviewActive && location.pathname === to
+
+              const isActive = isDropdown
+                ? isExcursionActive
+                : isContactButton
+                ? isContactActive
+                : isReview
+                ? isReviewActive
+                : to === '/'
+                ? isHomeActive
+                : isNormalActive
+
               if (isDropdown) {
                 return (
                   <li key={to} className="py-1">
                     <button
                       onClick={() => setMobileExcursionsExpanded(!mobileExcursionsExpanded)}
-                      className="w-full flex items-center justify-between text-sm font-bold tracking-wider uppercase py-2 text-slate-700 hover:text-forest-primary transition-colors cursor-pointer"
+                      className={`w-full flex items-center justify-between text-sm font-bold tracking-wider uppercase py-2 transition-colors cursor-pointer ${
+                        isActive ? 'text-forest-primary' : 'text-slate-700 hover:text-forest-primary'
+                      }`}
                     >
                       <span>{label}</span>
                       <ChevronDown
@@ -297,7 +323,11 @@ export default function Navbar() {
                     <NavLink
                       to={to}
                       onClick={() => setMenuOpen(false)}
-                      className="w-full inline-flex items-center justify-center px-6 py-3 rounded-full bg-forest-primary text-white font-bold text-sm tracking-wider uppercase hover:bg-forest-primary-light transition-all shadow-sm"
+                      className={`w-full inline-flex items-center justify-center px-6 py-3 rounded-full font-bold text-sm tracking-wider uppercase transition-all shadow-sm ${
+                        isActive
+                          ? 'bg-forest-primary text-white ring-2 ring-forest-primary ring-offset-2'
+                          : 'bg-forest-primary text-white hover:bg-forest-primary-light'
+                      }`}
                     >
                       {label}
                     </NavLink>
@@ -310,7 +340,9 @@ export default function Navbar() {
                   <li key={to}>
                     <button
                       onClick={handleReviewClick}
-                      className="w-full text-left text-sm font-bold tracking-wider uppercase py-2 text-slate-700 hover:text-forest-primary transition-colors cursor-pointer font-nav"
+                      className={`w-full text-left text-sm font-bold tracking-wider uppercase py-2 transition-colors cursor-pointer font-nav ${
+                        isActive ? 'text-forest-primary' : 'text-slate-700 hover:text-forest-primary'
+                      }`}
                     >
                       {label}
                     </button>
@@ -323,11 +355,9 @@ export default function Navbar() {
                   <NavLink
                     to={to}
                     onClick={() => setMenuOpen(false)}
-                    className={({ isActive }) =>
-                      `block text-sm font-bold tracking-wider uppercase py-2 transition-colors duration-200 ${
-                        isActive ? 'text-forest-primary' : 'text-slate-700 hover:text-forest-primary'
-                      }`
-                    }
+                    className={`block text-sm font-bold tracking-wider uppercase py-2 transition-colors duration-200 ${
+                      isActive ? 'text-forest-primary' : 'text-slate-700 hover:text-forest-primary'
+                    }`}
                   >
                     {label}
                   </NavLink>

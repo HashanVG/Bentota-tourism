@@ -89,17 +89,17 @@ export default function Navbar() {
           : 'border-transparent'
       }`}
     >
-      <div className="max-w-screen-2xl mx-auto h-full px-6 sm:px-10 md:px-14 lg:px-20 flex items-center justify-between">
-        <NavLink to="/" onClick={handleLogoClick} className="flex items-center">
+      <div className="max-w-screen-2xl mx-auto h-full px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16 flex items-center justify-between">
+        <NavLink to="/" onClick={handleLogoClick} className="flex items-center shrink-0">
           <img
             src={logo}
             alt="Bentota Samantha Tours & Travels"
-            className="h-12 sm:h-14 md:h-16 lg:h-[70px] w-auto object-contain"
+            className="h-11 sm:h-12 md:h-14 lg:h-[56px] xl:h-[68px] w-auto object-contain shrink-0"
           />
         </NavLink>
 
-        {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8 font-nav">
+        {/* Desktop links - shown on lg (1024px+) screens */}
+        <ul className="hidden lg:flex items-center gap-4 xl:gap-7 font-nav shrink-0">
           {links.map(({ to, label, isDropdown, isContactButton, isReview }) => {
             if (isDropdown) {
               const isExcursionActive =
@@ -113,7 +113,7 @@ export default function Navbar() {
                 >
                   <button
                     onClick={() => handleExcursionClick(null)}
-                    className={`relative py-1 text-sm font-bold tracking-wider uppercase transition-colors duration-200 flex items-center gap-1.5 cursor-pointer ${
+                    className={`relative py-1 text-xs xl:text-sm font-bold tracking-wider uppercase transition-colors duration-200 flex items-center gap-1 cursor-pointer whitespace-nowrap ${
                       isExcursionActive || excursionsDropdownOpen
                         ? 'text-forest-primary'
                         : 'text-slate-700 hover:text-forest-primary'
@@ -165,7 +165,7 @@ export default function Navbar() {
                 <li key={to}>
                   <NavLink
                     to={to}
-                    className={`inline-flex items-center justify-center px-6 py-2.5 rounded-full font-bold text-sm tracking-wider uppercase transition-all duration-200 cursor-pointer ${
+                    className={`inline-flex items-center justify-center px-4 py-2 xl:px-6 xl:py-2.5 rounded-full font-bold text-xs xl:text-sm tracking-wider uppercase transition-all duration-200 cursor-pointer whitespace-nowrap ${
                       isContactActive
                         ? 'bg-forest-primary text-white shadow-sm ring-2 ring-forest-primary ring-offset-2'
                         : 'bg-forest-primary text-white hover:bg-forest-primary-light shadow-xs hover:shadow-md hover:scale-105 active:scale-95'
@@ -183,7 +183,7 @@ export default function Navbar() {
                 <li key={to}>
                   <button
                     onClick={handleReviewClick}
-                    className={`relative py-1 text-sm font-bold tracking-wider uppercase transition-colors duration-200 font-nav cursor-pointer ${
+                    className={`relative py-1 text-xs xl:text-sm font-bold tracking-wider uppercase transition-colors duration-200 font-nav cursor-pointer whitespace-nowrap ${
                       isReviewActive
                         ? 'text-forest-primary'
                         : 'text-slate-700 hover:text-forest-primary'
@@ -203,7 +203,7 @@ export default function Navbar() {
                 <NavLink
                   to={to}
                   className={({ isActive }) =>
-                    `relative py-1 text-sm font-bold tracking-wider uppercase transition-colors duration-200 ${
+                    `relative py-1 text-xs xl:text-sm font-bold tracking-wider uppercase transition-colors duration-200 whitespace-nowrap ${
                       isActive ? 'text-forest-primary' : 'text-slate-700 hover:text-forest-primary'
                     }`
                   }
@@ -222,9 +222,9 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* Mobile hamburger */}
+        {/* Mobile & Tablet hamburger (< lg) */}
         <button
-          className="md:hidden flex flex-col justify-center items-center gap-1.5 p-2 text-slate-800"
+          className="lg:hidden flex flex-col justify-center items-center gap-1.5 p-2 text-slate-800 cursor-pointer"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -246,9 +246,9 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile dropdown menu */}
+      {/* Mobile & Tablet dropdown menu (< lg) */}
       {menuOpen && (
-        <div className="md:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-lg font-nav">
+        <div className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-lg font-nav">
           <ul className="flex flex-col px-6 py-4 gap-2">
             {links.map(({ to, label, isDropdown, isContactButton, isReview }) => {
               if (isDropdown) {

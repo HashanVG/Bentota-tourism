@@ -210,7 +210,7 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white leading-[1] md:leading-[1.02] tracking-tight max-w-5xl"
+            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl text-white leading-[1.05] tracking-tight max-w-5xl"
           >
             <span className="font-extrabold">Ayubowan</span>
             <br />

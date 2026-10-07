@@ -59,6 +59,9 @@ export function subscribeToLatestReviews(callback) {
             rating: Number(data.rating) || 5,
             text: data.text || "",
             source: data.source || "website",
+            tripType: data.tripType || "",
+            visitedDate: data.visitedDate || "",
+            writtenDate: data.writtenDate || "",
             createdAt: createdDate,
           };
         });

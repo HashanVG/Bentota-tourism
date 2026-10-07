@@ -21,7 +21,6 @@ import {
   subscribeToLatestReviews, 
   calculateAverageRating, 
 } from '../../services/reviewService'
-import { defaultReviews } from '../../data/reviewsData'
 import hero from '../../assets/home/hero.svg'
 import heroMobile from '../../assets/fba82c73204c5d020e8ce08eaa4a9cb0.jpg'
 import about1 from '../../assets/about/about5.jpg'
@@ -168,16 +167,14 @@ export default function HomePage() {
     };
   }, []);
 
-  // Display up to 10 latest reviews (new website submissions + verified TripAdvisor reviews)
+  // Retrieve reviews directly from Firebase Firestore in real time
   const displayedReviews = useMemo(() => {
-    // Only pick authentic website reviews from DB (ignoring old dummy initial seed)
-    const websiteReviews = reviewsFromDb.filter((r) => r.source === 'website');
-    if (websiteReviews.length > 0) {
-      const dbNames = new Set(websiteReviews.map((r) => r.name?.toLowerCase()));
-      const filteredDefaults = defaultReviews.filter((r) => !dbNames.has(r.name?.toLowerCase()));
-      return [...websiteReviews, ...filteredDefaults].slice(0, 10);
+    // Only real reviews from Firestore (tripadvisor reviews and website reviews)
+    const active = reviewsFromDb.filter((r) => r.source === 'tripadvisor' || r.source === 'website');
+    if (active.length > 0) {
+      return active.slice(0, 10);
     }
-    return defaultReviews;
+    return reviewsFromDb.filter((r) => r.source !== 'test').slice(0, 10);
   }, [reviewsFromDb]);
 
   // Average star rating calculated across displayed reviews (updates dynamically)

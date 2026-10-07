@@ -29,12 +29,7 @@ import cta from '../../assets/cta/cta2.jpg'
 import { excursionCategories, excursions } from '../../data/excursionsData'
 import ExcursionCard from '../../components/ExcursionCard'
 
-{/*Data for the relevant sections*/ }
-const stats = [
-  { value: 'x+', label: 'Excursions run' },
-  { value: 'x', label: 'Locations' },
-  { value: 'x', label: 'Years on the trail' },
-]
+
 
 
 
@@ -301,14 +296,7 @@ export default function HomePage() {
               Samantha Tours & Travels is a joint venture with thoroughly Sri Lankan roots. Samantha Tours & Travels’ main ambition is to be a brand leader in the tourist and leisure industry. We have long associations with leading international tour operators, and our clientele base spans travelers from across the globe. Our clientele base is thoroughly diverse, and we cater to the distinct tastes of our clients to their maximum satisfaction. Our motto is the safety and satisfaction of our clients. Our wealth is the goodwill of our clients. We highly regard the privacy of our clients.
             </p>
 
-            <div className="grid grid-cols-3 gap-6 border-t border-gray-100 pt-8">
-              {stats.map((s) => (
-                <div key={s.label}>
-                  <p className="font-display text-3xl text-forest-primary">{s.value}</p>
-                  <p className="text-xs text-gray-500 mt-1">{s.label}</p>
-                </div>
-              ))}
-            </div>
+
           </motion.div>
         </div>
         <div className="flex justify-center mt-16">

@@ -21,6 +21,7 @@ import {
   subscribeToLatestReviews, 
   calculateAverageRating, 
 } from '../../services/reviewService'
+import { defaultReviews } from '../../data/reviewsData'
 import hero from '../../assets/home/hero.svg'
 import heroMobile from '../../assets/fba82c73204c5d020e8ce08eaa4a9cb0.jpg'
 import about1 from '../../assets/about/about5.jpg'
@@ -167,15 +168,22 @@ export default function HomePage() {
     };
   }, []);
 
-  // Display up to 10 latest reviews directly from the database (newest to oldest)
+  // Display up to 10 latest reviews (new website submissions + verified TripAdvisor reviews)
   const displayedReviews = useMemo(() => {
-    return reviewsFromDb.slice(0, 10);
+    // Only pick authentic website reviews from DB (ignoring old dummy initial seed)
+    const websiteReviews = reviewsFromDb.filter((r) => r.source === 'website');
+    if (websiteReviews.length > 0) {
+      const dbNames = new Set(websiteReviews.map((r) => r.name?.toLowerCase()));
+      const filteredDefaults = defaultReviews.filter((r) => !dbNames.has(r.name?.toLowerCase()));
+      return [...websiteReviews, ...filteredDefaults].slice(0, 10);
+    }
+    return defaultReviews;
   }, [reviewsFromDb]);
 
-  // Average star rating calculated across ALL reviews in the database (updates dynamically)
+  // Average star rating calculated across displayed reviews (updates dynamically)
   const reviewStats = useMemo(() => {
-    return calculateAverageRating(reviewsFromDb);
-  }, [reviewsFromDb]);
+    return calculateAverageRating(displayedReviews);
+  }, [displayedReviews]);
 
   const goToReview = (dir) => {
     if (displayedReviews.length <= 1) return;
@@ -498,12 +506,17 @@ export default function HomePage() {
                     </div>
 
                     <div className="flex items-center justify-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-forest-primary text-white flex items-center justify-center font-semibold text-sm">
+                      <div className="w-10 h-10 rounded-full bg-forest-primary text-white flex items-center justify-center font-semibold text-sm shadow-sm">
                         {activeReview?.name?.charAt(0) || 'G'}
                       </div>
                       <div className="text-left">
                         <p className="text-sm font-semibold text-forest-dark">{activeReview?.name}</p>
                         <p className="text-xs text-gray-500">{activeReview?.location}</p>
+                        {activeReview?.tripType && (
+                          <p className="text-[11px] text-gray-400 mt-0.5">
+                            {activeReview.tripType} {activeReview.visitedDate ? `• ${activeReview.visitedDate}` : ''}
+                          </p>
+                        )}
                       </div>
                     </div>
                   </motion.div>
@@ -522,10 +535,10 @@ export default function HomePage() {
 
                   <div className="flex items-center gap-1.5">
                     {(() => {
-                      const maxDots = 4;
+                      const maxDots = 6;
                       const total = displayedReviews.length;
                       const count = Math.min(maxDots, total);
-                      const start = total <= maxDots ? 0 : Math.max(0, Math.min(safeReviewIndex - 1, total - maxDots));
+                      const start = total <= maxDots ? 0 : Math.max(0, Math.min(safeReviewIndex - 2, total - maxDots));
                       return Array.from({ length: count }).map((_, idx) => {
                         const targetIndex = start + idx;
                         const isActive = targetIndex === safeReviewIndex;

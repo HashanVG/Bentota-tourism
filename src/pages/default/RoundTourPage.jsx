@@ -8,6 +8,7 @@ import {
   Car,
   Shield,
   ArrowRight,
+  Sparkles,
   Hotel,
   ShieldCheck,
   Award,

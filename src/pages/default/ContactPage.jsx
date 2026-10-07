@@ -70,19 +70,33 @@ export default function ContactPage() {
     e.preventDefault()
     setStatus('sending')
 
+    const form = formRef.current
+    const formData = new FormData(form)
+    const visitorEmail = formData.get('reply_to') || formData.get('from_email') || ''
+
+    const templateParams = {
+      from_name: formData.get('from_name'),
+      reply_to: visitorEmail,
+      user_email: visitorEmail,
+      phone: formData.get('phone'),
+      country: formData.get('country'),
+      subject: formData.get('subject') || 'New Website Inquiry',
+      message: formData.get('message'),
+    }
+
     emailjs
-      .sendForm(
+      .send(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        formRef.current,
+        templateParams,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(() => {
         setStatus('success')
-        formRef.current.reset()
+        form.reset()
       })
       .catch((err) => {
-        console.error(err)
+        console.error('EmailJS error:', err)
         setStatus('error')
       })
   }
@@ -189,7 +203,7 @@ export default function ContactPage() {
                     <label className="text-xs text-gray-500 uppercase tracking-wider mb-2 block">Email</label>
                     <input
                       type="email"
-                      name="from_email"
+                      name="reply_to"
                       required
                       placeholder="your@email.com"
                       className="w-full bg-white/5 border border-forest-primary/20 rounded-lg px-4 py-3 text-sm text-forest-dark placeholder:text-gray-500 focus:outline-none focus:border-forest-primary transition-colors"

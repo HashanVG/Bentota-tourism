@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Star, X, CheckCircle2, Loader2, Sparkles } from 'lucide-react'
+import { Star, X, CheckCircle2, Loader2 } from 'lucide-react'
 import { submitReview } from '../services/reviewService'
 
 const RATING_LABELS = {
@@ -94,19 +94,19 @@ export default function ReviewModal({ isOpen, onClose, onReviewSubmitted }) {
             transition={{ duration: 0.25, ease: 'easeOut' }}
             className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden z-10 border border-gray-100"
           >
-            {/* Header decoration */}
-            <div className="bg-linear-to-r from-forest-primary to-forest-accent/90 px-6 py-5 text-white flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-forest-accent-light" />
-                <h3 className="font-display text-xl font-medium tracking-wide">Write a Review</h3>
+            {/* Header */}
+            <div className="bg-forest-primary px-6 py-5 sm:px-8 text-white flex items-center justify-between">
+              <div>
+                <h3 className="font-display text-xl sm:text-2xl font-bold tracking-tight text-white">Write a Review</h3>
+                <p className="text-xs sm:text-sm text-emerald-100/80 mt-0.5 font-normal">Share your experience with Samantha Tours</p>
               </div>
               <button
                 type="button"
                 onClick={handleClose}
-                className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors"
+                className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 active:bg-white/30 flex items-center justify-center text-white transition-colors cursor-pointer shrink-0 ml-4"
                 aria-label="Close dialog"
               >
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5" />
               </button>
             </div>
 

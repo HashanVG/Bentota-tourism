@@ -8,7 +8,6 @@ import {
   Car,
   Shield,
   ArrowRight,
-  Sparkles,
   Hotel,
   ShieldCheck,
   Award,
@@ -201,13 +200,10 @@ export default function RoundTourPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-widest bg-forest-primary-light/20 text-forest-primary-light border border-forest-primary-light/30 mb-4">
-              <Sparkles className="w-3.5 h-3.5" /> Inspiration For Your Journey
-            </span>
-            <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white tracking-tight">
               Popular Round Tour <span className="text-forest-primary-light">Packages</span>
             </h1>
-            <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed text-justify sm:text-center">
+            <p className="mt-5 text-base sm:text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed text-center">
               Every itinerary can be fully customized according to your arrival dates, preferred pace, hotel categories, and bucket-list destinations.
             </p>
           </motion.div>

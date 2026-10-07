@@ -275,13 +275,12 @@ export default function ContactPage() {
             <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-sm h-64 sm:h-80 lg:h-full lg:min-h-75">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d14612.37368419686!2d79.99902610769485!3d6.416112685784983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2slk!4v1786045653411!5m2!1sen!2slk"  
-                allowfullscreen="" 
+                allowFullScreen
                 loading="lazy"
-                referrerpolicy="strict-origin-when-cross-origin"
+                referrerPolicy="strict-origin-when-cross-origin"
                 width="800"
                 height="600"
                 style={{ border: 0 }}
-                loading="lazy"
                 title="Location"
               />
             </div>

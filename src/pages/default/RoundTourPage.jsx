@@ -8,7 +8,6 @@ import {
   Car,
   Shield,
   ArrowRight,
-  Sparkles,
   Hotel,
   ShieldCheck,
   Award,
@@ -71,7 +70,7 @@ const tourPackages = [
         desc: '24/7 dedicated A/C vehicle, fuel, highway tolls, and driver-guide from airport arrival to departure.',
       },
       {
-        icon: Sparkles,
+        icon: Compass,
         label: 'Top Experiences:',
         desc: 'Sigiriya Rock, Kandy Temple, scenic mountain train ride, Yala leopard safari, Mirissa whale watching, and Galle Fort.',
       },
@@ -86,10 +85,10 @@ const tourPackages = [
     id: 'highlights-circuit-8d-7n',
     tourNumber: '02',
     duration: '8D / 7N',
-    badge: '🌴 Highlights Circuit',
+    badge: 'Highlights Circuit',
     badgeColor: 'bg-teal-50 text-teal-800 border-teal-200/80',
     accentGradient: 'from-teal-600 via-emerald-500 to-green-400',
-    title: '🌴 8D / 7N Sri Lanka Highlights Circuit',
+    title: '8D/7N Sri Lanka Highlights Circuit',
     route: [
       'Airport',
       'Sigiriya',
@@ -112,7 +111,7 @@ const tourPackages = [
         desc: 'Dedicated A/C car/van, fuel, tolls, and English-speaking chauffeur-guide (airport pickup to drop-off).',
       },
       {
-        icon: Sparkles,
+        icon: Compass,
         label: 'Key Highlights:',
         desc: 'Sigiriya Lion Rock, Temple of the Tooth, Tea Country, Nine Arches Bridge, Yala 4x4 Safari, and historic Galle Fort.',
       },
@@ -127,10 +126,10 @@ const tourPackages = [
     id: 'express-discovery-6d-5n',
     tourNumber: '03',
     duration: '6D / 5N',
-    badge: '🌊 Express Discovery',
+    badge: 'Express Discovery',
     badgeColor: 'bg-cyan-50 text-cyan-800 border-cyan-200/80',
     accentGradient: 'from-cyan-600 via-teal-500 to-emerald-400',
-    title: '🌊 6D / 5N Sri Lanka Express Discovery',
+    title: '6D/5N Sri Lanka Express Discovery',
     route: [
       'Airport',
       'Sigiriya',
@@ -151,12 +150,12 @@ const tourPackages = [
         desc: 'Modern A/C vehicle with private driver-guide from arrival to departure.',
       },
       {
-        icon: Sparkles,
+        icon: Compass,
         label: 'Key Highlights:',
         desc: 'Sigiriya Rock Fortress, Dambulla Caves, Kandy Cultural Show & Temple, Ramboda Waterfalls, Tea Factory, and Southern Golden Beaches.',
       },
       {
-        icon: Compass,
+        icon: Award,
         label: 'Perfect For:',
         desc: 'Short getaways, couples, and first-time travelers seeking culture, nature, and coast in one quick trip.',
       },
@@ -248,8 +247,8 @@ export default function RoundTourPage() {
                       <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 text-xs font-semibold px-3 py-1 rounded-full border border-emerald-200/80 shadow-2xs">
                         <Calendar className="w-3.5 h-3.5 text-emerald-600" /> {tour.duration}
                       </span>
-                      <span className={`inline-flex items-center gap-1 text-xs font-semibold px-3 py-1 rounded-full border shadow-2xs ${tour.badgeColor}`}>
-                        <Sparkles className="w-3.5 h-3.5" /> {tour.badge}
+                      <span className={`inline-flex items-center text-xs font-semibold px-3.5 py-1 rounded-full border shadow-2xs ${tour.badgeColor}`}>
+                        {tour.badge}
                       </span>
                     </div>
 

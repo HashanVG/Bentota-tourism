@@ -39,6 +39,8 @@ lerna-debug.log*
 *.sw?
 .DS_Store
 Thumbs.db
+ehthumbs.db
+desktop.ini
 
 # Cache & Temporary
 .cache/
